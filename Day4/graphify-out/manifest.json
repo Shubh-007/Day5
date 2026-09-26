@@ -1,0 +1,38 @@
+{
+  ".claude/settings.local.json": {
+    "mtime": 1789794739.106658,
+    "seen": 1789795284.902294,
+    "ast_hash": "c5a34080e5fa0e74b1053485144d3d65",
+    "semantic_hash": "c5a34080e5fa0e74b1053485144d3d65"
+  },
+  ".mcp.json": {
+    "mtime": 1789794354.7336788,
+    "seen": 1789795284.9023042,
+    "ast_hash": "df3dc7622f90dd6e953d733bf2e1d47d",
+    "semantic_hash": "df3dc7622f90dd6e953d733bf2e1d47d"
+  },
+  "fund-data.json": {
+    "mtime": 1789794618.5528827,
+    "seen": 1789795284.9023092,
+    "ast_hash": "443198cfaecef58aee709d8590218def",
+    "semantic_hash": "443198cfaecef58aee709d8590218def"
+  },
+  ".claude/agents/fund-data-fetcher.md": {
+    "mtime": 1789794633.9820056,
+    "seen": 1789795284.9023116,
+    "ast_hash": "2792db846bbba9f5092ae78fa7eec02e",
+    "semantic_hash": "2792db846bbba9f5092ae78fa7eec02e"
+  },
+  "sip-calculator-enhanced.html": {
+    "mtime": 1789794532.471562,
+    "seen": 1789795284.9023144,
+    "ast_hash": "fa56cb168757034d407ee37de80b4c76",
+    "semantic_hash": "fa56cb168757034d407ee37de80b4c76"
+  },
+  "sip-calculator.html": {
+    "mtime": 1789794042.021917,
+    "seen": 1789795284.9023173,
+    "ast_hash": "3151bea388468d277b6cd3d819f7b603",
+    "semantic_hash": "3151bea388468d277b6cd3d819f7b603"
+  }
+}

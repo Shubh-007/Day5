@@ -1,0 +1,33 @@
+{
+  "files": [
+    ".obsidian/graph.json",
+    "CAGR Return Calculation.md",
+    "SIP Calculator Enhanced Page (with Live Fund Data).md",
+    "SIP Calculator Page (Basic, with Pie Chart).md",
+    "Target Funds List (5 Indian Large-Flexi-Cap Schemes).md",
+    "_COMMUNITY_Form Reset.md",
+    "_COMMUNITY_Fund Data Pipeline.md",
+    "_COMMUNITY_Live Fund Data Flow.md",
+    "_COMMUNITY_MCP Server Config.md",
+    "_COMMUNITY_SIP Calculation Core.md",
+    "calculateSIP().md",
+    "calculateSIP()_1.md",
+    "displayFunds().md",
+    "dot-mcp.json.md",
+    "drawPieChart().md",
+    "fetch.md",
+    "fetchMarketData().md",
+    "filterFunds().md",
+    "fmtPct().md",
+    "formatNumber().md",
+    "formatNumber()_1.md",
+    "fund-data-fetcher Agent.md",
+    "fund-data.json Output Schema.md",
+    "homelabuservenvbinmcp-server-fetch.md",
+    "mfapi.in Public API.md",
+    "resetForm().md",
+    "resetForm()_1.md",
+    "selectFund().md",
+    "useFundReturns().md"
+  ]
+}

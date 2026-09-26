@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator - Enhanced with Market Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .currency {
+            position: absolute;
+            left: 12px;
+            color: #999;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .input-wrapper input {
+            padding-left: 35px;
+        }
+
+        .results {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 32px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-label {
+            color: #666;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .result-value {
+            color: #333;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .result-item.total-amount .result-value {
+            color: #667eea;
+            font-size: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calculate-btn, .fetch-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .calculate-btn:hover, .fetch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .calculate-btn:disabled, .fetch-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .reset-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .reset-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .info-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        .funds-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .fund-item {
+            background: #f8f9fa;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .fund-item:hover {
+            background: #e8e9fa;
+            border-left-color: #667eea;
+        }
+
+        .fund-item.selected {
+            background: #e8e9fa;
+            border-left-color: #667eea;
+        }
+
+        .fund-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .fund-returns {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .status-message {
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .status-loading {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-success {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .status-error {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+
+        .market-indices {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .index-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .index-item:last-child {
+            border-bottom: none;
+        }
+
+        .index-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .index-value {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .index-change {
+            font-size: 12px;
+            color: #4caf50;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Left Panel: SIP Calculator -->
+        <div class="container">
+            <h1>💰 SIP Calculator</h1>
+
+            <form id="sipForm">
+                <div class="form-group">
+                    <label for="monthlyInvestment">Monthly Investment Amount</label>
+                    <div class="input-wrapper">
+                        <span class="currency">₹</span>
+                        <input type="number" id="monthlyInvestment" min="1" value="5000" required>
+                    </div>
+                    <div class="info-text">Amount you want to invest every month</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="annualReturn">Annual Rate of Return (%)</label>
+                    <input type="number" id="annualReturn" min="0" max="100" step="0.1" value="12" required>
+                    <div class="info-text">Expected annual return percentage</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="investmentPeriod">Investment Period</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="investmentPeriod" min="1" value="10" required style="flex: 1;">
+                        <select id="periodUnit" style="flex: 1; width: auto;">
+                            <option value="years">Years</option>
+                            <option value="months">Months</option>
+                        </select>
+                    </div>
+                    <div class="info-text">How long you plan to invest</div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="calculate-btn" onclick="calculateSIP()">Calculate</button>
+                    <button type="reset" class="reset-btn" onclick="resetForm()">Reset</button>
+                </div>
+            </form>
+
+            <div id="results" class="results hidden">
+                <div class="result-item total-amount">
+                    <span class="result-label">Total Investment Value</span>
+                    <span class="result-value">₹<span id="totalValue">0</span></span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Total Invested:</span>
+                    <span class="result-value">₹<span id="investedAmount">0</span></span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Interest Earned:</span>
+                    <span class="result-value">₹<span id="interestEarned">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Live Fund Data -->
+        <div class="container">
+            <h2>📊 Live Mutual Fund Data</h2>
+            <button class="fetch-btn" onclick="fetchMarketData()" id="fetchBtn">Load Fund Data</button>
+            <div id="statusMessage" class="hidden status-message"></div>
+            <div id="fetchedInfo" class="info-text hidden" style="margin-top: 8px;"></div>
+
+            <!-- Mutual Funds -->
+            <div id="fundsSection" class="hidden">
+                <h3 style="margin: 24px 0 12px 0; font-size: 16px;">Available Funds</h3>
+                <input type="text" id="fundSearch" placeholder="Search funds..." style="margin-bottom: 12px;" onkeyup="filterFunds()">
+                <div id="fundsList" class="funds-list"></div>
+
+                <div id="selectedFund" class="hidden" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #ddd;">
+                    <h4 style="margin-bottom: 12px; color: #333;">Selected Fund Details</h4>
+                    <div id="fundDetails"></div>
+                    <button class="calculate-btn" onclick="useFundReturns()" style="margin-top: 12px; width: 100%;">Use This Fund's Return</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let funds = [];
+        let selectedFund = null;
+
+        function calculateSIP() {
+            const monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value);
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value);
+            const investmentPeriod = parseFloat(document.getElementById('investmentPeriod').value);
+            const periodUnit = document.getElementById('periodUnit').value;
+
+            if (!monthlyInvestment || !annualReturn || !investmentPeriod) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const months = periodUnit === 'years' ? investmentPeriod * 12 : investmentPeriod;
+            const monthlyRate = annualReturn / 100 / 12;
+
+            let totalValue;
+            if (monthlyRate === 0) {
+                totalValue = monthlyInvestment * months;
+            } else {
+                totalValue = monthlyInvestment * (((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate));
+            }
+
+            const totalInvested = monthlyInvestment * months;
+            const interestEarned = totalValue - totalInvested;
+
+            document.getElementById('totalValue').textContent = formatNumber(totalValue);
+            document.getElementById('investedAmount').textContent = formatNumber(totalInvested);
+            document.getElementById('interestEarned').textContent = formatNumber(interestEarned);
+
+            document.getElementById('results').classList.remove('hidden');
+        }
+
+        function formatNumber(num) {
+            return Math.round(num).toLocaleString('en-IN');
+        }
+
+        function resetForm() {
+            document.getElementById('sipForm').reset();
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('monthlyInvestment').value = '5000';
+            document.getElementById('annualReturn').value = '12';
+            document.getElementById('investmentPeriod').value = '10';
+        }
+
+        async function fetchMarketData() {
+            const btn = document.getElementById('fetchBtn');
+            const statusMsg = document.getElementById('statusMessage');
+            const fetchedInfo = document.getElementById('fetchedInfo');
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Loading...';
+            statusMsg.classList.remove('hidden', 'status-error', 'status-success');
+            statusMsg.classList.add('status-loading');
+            statusMsg.textContent = 'Loading fund-data.json...';
+
+            try {
+                const res = await fetch('./fund-data.json', { cache: 'no-store' });
+                if (!res.ok) throw new Error('fund-data.json not found (HTTP ' + res.status + ')');
+                const data = await res.json();
+
+                funds = data.funds || [];
+                displayFunds(funds);
+
+                fetchedInfo.textContent = `Source: ${data.source || 'unknown'} · Fetched: ${data.fetchedAt || 'unknown'}`;
+                fetchedInfo.classList.remove('hidden');
+
+                statusMsg.classList.remove('status-loading');
+                statusMsg.classList.add('status-success');
+                statusMsg.textContent = '✓ Loaded live fund data';
+            } catch (error) {
+                statusMsg.classList.remove('status-loading');
+                statusMsg.classList.add('status-error');
+                statusMsg.textContent = '✗ ' + error.message + ' — run the fund-data-fetcher agent first to generate it.';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Load Fund Data';
+            }
+        }
+
+        function displayFunds(fundsList) {
+            const container = document.getElementById('fundsList');
+            container.innerHTML = '';
+
+            fundsList.forEach(fund => {
+                const item = document.createElement('div');
+                item.className = 'fund-item';
+                item.onclick = () => selectFund(fund, item);
+                item.innerHTML = `
+                    <div class="fund-name">${fund.name}</div>
+                    <div class="fund-returns">
+                        1Y: ${fmtPct(fund.returns1Year)} | 3Y: ${fmtPct(fund.returns3Year)} | 5Y: ${fmtPct(fund.returns5Year)}
+                    </div>
+                    <div style="font-size: 11px; color: #999;">NAV: ₹${fund.nav} (${fund.navDate || ''})</div>
+                `;
+                container.appendChild(item);
+            });
+
+            document.getElementById('fundsSection').classList.remove('hidden');
+        }
+
+        function filterFunds() {
+            const query = document.getElementById('fundSearch').value.toLowerCase();
+            const filtered = funds.filter(f => f.name.toLowerCase().includes(query));
+            displayFunds(filtered);
+        }
+
+        function fmtPct(v) {
+            return (v === null || v === undefined) ? 'N/A' : v + '%';
+        }
+
+        function selectFund(fund, itemEl) {
+            selectedFund = fund;
+
+            const items = document.querySelectorAll('.fund-item');
+            items.forEach(item => item.classList.remove('selected'));
+            itemEl.classList.add('selected');
+
+            const details = document.getElementById('fundDetails');
+            details.innerHTML = `
+                <div style="margin-bottom: 12px;">
+                    <strong style="color: #333;">${fund.name}</strong>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                    <div>
+                        <div style="font-size: 12px; color: #666;">1-Year Return</div>
+                        <div style="font-size: 18px; font-weight: 600; color: #667eea;">${fmtPct(fund.returns1Year)}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #666;">3-Year Return</div>
+                        <div style="font-size: 18px; font-weight: 600; color: #667eea;">${fmtPct(fund.returns3Year)}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #666;">5-Year Return</div>
+                        <div style="font-size: 18px; font-weight: 600; color: #667eea;">${fmtPct(fund.returns5Year)}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Current NAV</div>
+                        <div style="font-size: 18px; font-weight: 600; color: #667eea;">₹${fund.nav}</div>
+                    </div>
+                </div>
+                <div style="font-size: 12px; color: #666; background: #f8f9fa; padding: 8px; border-radius: 4px;">
+                    NAV as of ${fund.navDate || 'unknown'} · Scheme code ${fund.schemeCode || 'n/a'}
+                </div>
+            `;
+
+            document.getElementById('selectedFund').classList.remove('hidden');
+        }
+
+        function useFundReturns() {
+            if (!selectedFund) return;
+
+            const r = selectedFund.returns5Year ?? selectedFund.returns3Year ?? selectedFund.returns1Year;
+            if (r === null || r === undefined) {
+                alert('No return data available for this fund.');
+                return;
+            }
+            document.getElementById('annualReturn').value = r;
+
+            document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Allow Enter key for search
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.target.id === 'fundSearch') {
+                filterFunds();
+            }
+        });
+    </script>
+</body>
+</html>

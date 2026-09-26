@@ -1,0 +1,664 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "live_fund_data_flow",
+        "label": "Live Fund Data Browsing Flow in Enhanced Calculator",
+        "nodes": [
+          "sip_calculator_enhanced_fetchmarketdata",
+          "sip_calculator_enhanced_displayfunds",
+          "sip_calculator_enhanced_filterfunds",
+          "sip_calculator_enhanced_selectfund",
+          "sip_calculator_enhanced_usefundreturns",
+          "sip_calculator_enhanced_fmtpct"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "sip-calculator-enhanced.html"
+      },
+      {
+        "id": "fund_data_fetch_to_sip_pipeline",
+        "label": "End-to-End Pipeline: Fetch Live NAV Data to SIP Return Input",
+        "nodes": [
+          "claude_agents_fund_data_fetcher_agent",
+          "claude_agents_fund_data_fetcher_fund_data_json",
+          "sip_calculator_enhanced_fetchmarketdata",
+          "sip_calculator_enhanced_usefundreturns",
+          "sip_calculator_enhanced_calculatesip"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": ".claude/agents/fund-data-fetcher.md"
+      },
+      {
+        "id": "sip_core_calculation_duplication",
+        "label": "Duplicated Core SIP Calculation Logic Across Both Pages",
+        "nodes": [
+          "sip_calculator_enhanced_calculatesip",
+          "sip_calculator_enhanced_formatnumber",
+          "sip_calculator_enhanced_resetform",
+          "sip_calculator_calculatesip",
+          "sip_calculator_formatnumber",
+          "sip_calculator_resetform"
+        ],
+        "relation": "implement",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "sip-calculator-enhanced.html"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "mcp",
+      "label": ".mcp.json",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "MCP Server Config",
+      "file_type": "code",
+      "metadata": {
+        "mcp_kind": "mcp_config_file"
+      },
+      "norm_label": ".mcp.json",
+      "source_file": ".mcp.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "mcp_command_home_labuser_venv_bin_mcp_server_fetch",
+      "label": "/home/labuser/venv/bin/mcp-server-fetch",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "MCP Server Config",
+      "file_type": "code",
+      "metadata": {
+        "mcp_kind": "mcp_command"
+      },
+      "norm_label": "/home/labuser/venv/bin/mcp-server-fetch",
+      "source_file": ".mcp.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "mcp_mcp_server_fetch",
+      "label": "fetch",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "MCP Server Config",
+      "file_type": "code",
+      "metadata": {
+        "mcp_kind": "mcp_server"
+      },
+      "norm_label": "fetch",
+      "source_file": ".mcp.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "sip_calculator_enhanced_page",
+      "label": "SIP Calculator Enhanced Page (with Live Fund Data)",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "Fund Data Pipeline",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "sip calculator enhanced page (with live fund data)",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_page",
+      "label": "SIP Calculator Page (Basic, with Pie Chart)",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "Fund Data Pipeline",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "sip calculator page (basic, with pie chart)",
+      "source_file": "sip-calculator.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_agents_fund_data_fetcher_fund_data_json",
+      "label": "fund-data.json Output Schema",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "Fund Data Pipeline",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "fund-data.json output schema",
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_agents_fund_data_fetcher_mfapi_api",
+      "label": "mfapi.in Public API",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "Fund Data Pipeline",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "mfapi.in public api",
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_agents_fund_data_fetcher_target_funds",
+      "label": "Target Funds List (5 Indian Large-/Flexi-Cap Schemes)",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "Fund Data Pipeline",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "target funds list (5 indian large-/flexi-cap schemes)",
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_agents_fund_data_fetcher_agent",
+      "label": "fund-data-fetcher Agent",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "Fund Data Pipeline",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "fund-data-fetcher agent",
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_agents_fund_data_fetcher_cagr_formula",
+      "label": "CAGR Return Calculation",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "Fund Data Pipeline",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "cagr return calculation",
+      "rationale": "CAGR is computed from the latest NAV back to the NAV closest to 1/3/5 years ago, rounded to 1 decimal; if history doesn't extend far enough for the 3- or 5-year point the field is omitted rather than guessed. This reflects the agent's core principle of never inventing numbers not derived from actual fetched data.",
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_enhanced_displayfunds",
+      "label": "displayFunds()",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Live Fund Data Flow",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "displayfunds()",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_enhanced_fetchmarketdata",
+      "label": "fetchMarketData()",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Live Fund Data Flow",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "fetchmarketdata()",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_enhanced_filterfunds",
+      "label": "filterFunds()",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Live Fund Data Flow",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "filterfunds()",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_enhanced_fmtpct",
+      "label": "fmtPct()",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Live Fund Data Flow",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "fmtpct()",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_enhanced_selectfund",
+      "label": "selectFund()",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Live Fund Data Flow",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "selectfund()",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_enhanced_usefundreturns",
+      "label": "useFundReturns()",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Live Fund Data Flow",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "usefundreturns()",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_calculatesip",
+      "label": "calculateSIP()",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "SIP Calculation Core",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "calculatesip()",
+      "source_file": "sip-calculator.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_drawpiechart",
+      "label": "drawPieChart()",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "SIP Calculation Core",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "drawpiechart()",
+      "source_file": "sip-calculator.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_enhanced_calculatesip",
+      "label": "calculateSIP()",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "SIP Calculation Core",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "calculatesip()",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_enhanced_formatnumber",
+      "label": "formatNumber()",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "SIP Calculation Core",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "formatnumber()",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_formatnumber",
+      "label": "formatNumber()",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "SIP Calculation Core",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "formatnumber()",
+      "source_file": "sip-calculator.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_enhanced_resetform",
+      "label": "resetForm()",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "Form Reset",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "resetform()",
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "sip_calculator_resetform",
+      "label": "resetForm()",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "Form Reset",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "resetform()",
+      "source_file": "sip-calculator.html",
+      "source_location": null,
+      "source_url": null
+    }
+  ],
+  "links": [
+    {
+      "source": "mcp_mcp_server_fetch",
+      "target": "mcp_command_home_labuser_venv_bin_mcp_server_fetch",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "command",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "mcp",
+      "target": "mcp_mcp_server_fetch",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_calculatesip",
+      "target": "sip_calculator_drawpiechart",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_calculatesip",
+      "target": "sip_calculator_formatnumber",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_calculatesip",
+      "target": "sip_calculator_enhanced_formatnumber",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_displayfunds",
+      "target": "sip_calculator_enhanced_fmtpct",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_displayfunds",
+      "target": "sip_calculator_enhanced_selectfund",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_fetchmarketdata",
+      "target": "sip_calculator_enhanced_displayfunds",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_filterfunds",
+      "target": "sip_calculator_enhanced_displayfunds",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_selectfund",
+      "target": "sip_calculator_enhanced_fmtpct",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_fund_data_fetcher_agent",
+      "target": "claude_agents_fund_data_fetcher_fund_data_json",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_fund_data_fetcher_cagr_formula",
+      "target": "claude_agents_fund_data_fetcher_agent",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_fund_data_fetcher_agent",
+      "target": "claude_agents_fund_data_fetcher_mfapi_api",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_fund_data_fetcher_agent",
+      "target": "claude_agents_fund_data_fetcher_target_funds",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_fund_data_fetcher_agent",
+      "target": "sip_calculator_enhanced_page",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_fund_data_fetcher_fund_data_json",
+      "target": "sip_calculator_enhanced_fetchmarketdata",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/agents/fund-data-fetcher.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_fetchmarketdata",
+      "target": "claude_agents_fund_data_fetcher_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_filterfunds",
+      "target": "sip_calculator_enhanced_fetchmarketdata",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_selectfund",
+      "target": "sip_calculator_enhanced_usefundreturns",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_page",
+      "target": "sip_calculator_enhanced_page",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "sip-calculator.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_calculatesip",
+      "target": "sip_calculator_calculatesip",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_formatnumber",
+      "target": "sip_calculator_formatnumber",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "sip_calculator_enhanced_resetform",
+      "target": "sip_calculator_resetform",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "sip-calculator-enhanced.html",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "live_fund_data_flow",
+      "label": "Live Fund Data Browsing Flow in Enhanced Calculator",
+      "nodes": [
+        "sip_calculator_enhanced_fetchmarketdata",
+        "sip_calculator_enhanced_displayfunds",
+        "sip_calculator_enhanced_filterfunds",
+        "sip_calculator_enhanced_selectfund",
+        "sip_calculator_enhanced_usefundreturns",
+        "sip_calculator_enhanced_fmtpct"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sip-calculator-enhanced.html"
+    },
+    {
+      "id": "fund_data_fetch_to_sip_pipeline",
+      "label": "End-to-End Pipeline: Fetch Live NAV Data to SIP Return Input",
+      "nodes": [
+        "claude_agents_fund_data_fetcher_agent",
+        "claude_agents_fund_data_fetcher_fund_data_json",
+        "sip_calculator_enhanced_fetchmarketdata",
+        "sip_calculator_enhanced_usefundreturns",
+        "sip_calculator_enhanced_calculatesip"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".claude/agents/fund-data-fetcher.md"
+    },
+    {
+      "id": "sip_core_calculation_duplication",
+      "label": "Duplicated Core SIP Calculation Logic Across Both Pages",
+      "nodes": [
+        "sip_calculator_enhanced_calculatesip",
+        "sip_calculator_enhanced_formatnumber",
+        "sip_calculator_enhanced_resetform",
+        "sip_calculator_calculatesip",
+        "sip_calculator_formatnumber",
+        "sip_calculator_resetform"
+      ],
+      "relation": "implement",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "sip-calculator-enhanced.html"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+name: k6-observability
+
+services:
+  influxdb:
+    image: influxdb:1.8
+    environment:
+      - INFLUXDB_DB=k6
+      - INFLUXDB_HTTP_FLUX_ENABLED=true
+    ports:
+      - "8086:8086"
+    networks:
+      - k6-observability
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - ./grafana-k6/provisioning:/etc/grafana/provisioning
+    ports:
+      - "3001:3000"
+    depends_on:
+      - influxdb
+    networks:
+      - k6-observability
+
+networks:
+  k6-observability:
+    driver: bridge

@@ -1,0 +1,401 @@
+{
+  "nodes": [
+    {
+      "id": "g0",
+      "type": "group",
+      "label": "Fund Data Pipeline",
+      "x": 0,
+      "y": 0,
+      "width": 660,
+      "height": 420,
+      "color": "1"
+    },
+    {
+      "id": "n_claude_agents_fund_data_fetcher_cagr_formula",
+      "type": "file",
+      "file": "CAGR Return Calculation.md",
+      "x": 20,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_enhanced_page",
+      "type": "file",
+      "file": "SIP Calculator Enhanced Page (with Live Fund Data).md",
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_page",
+      "type": "file",
+      "file": "SIP Calculator Page (Basic, with Pie Chart).md",
+      "x": 420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_claude_agents_fund_data_fetcher_target_funds",
+      "type": "file",
+      "file": "Target Funds List (5 Indian Large-Flexi-Cap Schemes).md",
+      "x": 20,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_claude_agents_fund_data_fetcher_agent",
+      "type": "file",
+      "file": "fund-data-fetcher Agent.md",
+      "x": 220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_claude_agents_fund_data_fetcher_fund_data_json",
+      "type": "file",
+      "file": "fund-data.json Output Schema.md",
+      "x": 420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_claude_agents_fund_data_fetcher_mfapi_api",
+      "type": "file",
+      "file": "mfapi.in Public API.md",
+      "x": 20,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "Live Fund Data Flow",
+      "x": 740,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_sip_calculator_enhanced_displayfunds",
+      "type": "file",
+      "file": "displayFunds().md",
+      "x": 760,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_enhanced_fetchmarketdata",
+      "type": "file",
+      "file": "fetchMarketData().md",
+      "x": 960,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_enhanced_filterfunds",
+      "type": "file",
+      "file": "filterFunds().md",
+      "x": 1160,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_enhanced_fmtpct",
+      "type": "file",
+      "file": "fmtPct().md",
+      "x": 760,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_enhanced_selectfund",
+      "type": "file",
+      "file": "selectFund().md",
+      "x": 960,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_enhanced_usefundreturns",
+      "type": "file",
+      "file": "useFundReturns().md",
+      "x": 1160,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "label": "SIP Calculation Core",
+      "x": 1480,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_sip_calculator_calculatesip",
+      "type": "file",
+      "file": "calculateSIP().md",
+      "x": 1500,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_enhanced_calculatesip",
+      "type": "file",
+      "file": "calculateSIP()_1.md",
+      "x": 1700,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_drawpiechart",
+      "type": "file",
+      "file": "drawPieChart().md",
+      "x": 1900,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_enhanced_formatnumber",
+      "type": "file",
+      "file": "formatNumber().md",
+      "x": 1500,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_formatnumber",
+      "type": "file",
+      "file": "formatNumber()_1.md",
+      "x": 1700,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g3",
+      "type": "group",
+      "label": "MCP Server Config",
+      "x": 0,
+      "y": 500,
+      "width": 600,
+      "height": 400,
+      "color": "4"
+    },
+    {
+      "id": "n_mcp",
+      "type": "file",
+      "file": "dot-mcp.json.md",
+      "x": 20,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_mcp_command_home_labuser_venv_bin_mcp_server_fetch",
+      "type": "file",
+      "file": "homelabuservenvbinmcp-server-fetch.md",
+      "x": 220,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_mcp_mcp_server_fetch",
+      "type": "file",
+      "file": "fetch.md",
+      "x": 20,
+      "y": 660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g4",
+      "type": "group",
+      "label": "Form Reset",
+      "x": 740,
+      "y": 500,
+      "width": 600,
+      "height": 400,
+      "color": "5"
+    },
+    {
+      "id": "n_sip_calculator_enhanced_resetform",
+      "type": "file",
+      "file": "resetForm().md",
+      "x": 760,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_sip_calculator_resetform",
+      "type": "file",
+      "file": "resetForm()_1.md",
+      "x": 960,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_mcp_mcp_mcp_server_fetch",
+      "fromNode": "n_mcp",
+      "toNode": "n_mcp_mcp_server_fetch",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_mcp_command_home_labuser_venv_bin_mcp_server_fetch_mcp_mcp_server_fetch",
+      "fromNode": "n_mcp_command_home_labuser_venv_bin_mcp_server_fetch",
+      "toNode": "n_mcp_mcp_server_fetch",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_page_claude_agents_fund_data_fetcher_agent",
+      "fromNode": "n_sip_calculator_enhanced_page",
+      "toNode": "n_claude_agents_fund_data_fetcher_agent",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_page_sip_calculator_page",
+      "fromNode": "n_sip_calculator_enhanced_page",
+      "toNode": "n_sip_calculator_page",
+      "label": "semantically_similar_to [INFERRED]"
+    },
+    {
+      "id": "e_claude_agents_fund_data_fetcher_fund_data_json_claude_agents_fund_data_fetcher_agent",
+      "fromNode": "n_claude_agents_fund_data_fetcher_fund_data_json",
+      "toNode": "n_claude_agents_fund_data_fetcher_agent",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_agents_fund_data_fetcher_fund_data_json_sip_calculator_enhanced_fetchmarketdata",
+      "fromNode": "n_claude_agents_fund_data_fetcher_fund_data_json",
+      "toNode": "n_sip_calculator_enhanced_fetchmarketdata",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_agents_fund_data_fetcher_mfapi_api_claude_agents_fund_data_fetcher_agent",
+      "fromNode": "n_claude_agents_fund_data_fetcher_mfapi_api",
+      "toNode": "n_claude_agents_fund_data_fetcher_agent",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_agents_fund_data_fetcher_target_funds_claude_agents_fund_data_fetcher_agent",
+      "fromNode": "n_claude_agents_fund_data_fetcher_target_funds",
+      "toNode": "n_claude_agents_fund_data_fetcher_agent",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_agents_fund_data_fetcher_agent_claude_agents_fund_data_fetcher_cagr_formula",
+      "fromNode": "n_claude_agents_fund_data_fetcher_agent",
+      "toNode": "n_claude_agents_fund_data_fetcher_cagr_formula",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_agents_fund_data_fetcher_agent_sip_calculator_enhanced_fetchmarketdata",
+      "fromNode": "n_claude_agents_fund_data_fetcher_agent",
+      "toNode": "n_sip_calculator_enhanced_fetchmarketdata",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_displayfunds_sip_calculator_enhanced_fmtpct",
+      "fromNode": "n_sip_calculator_enhanced_displayfunds",
+      "toNode": "n_sip_calculator_enhanced_fmtpct",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_displayfunds_sip_calculator_enhanced_selectfund",
+      "fromNode": "n_sip_calculator_enhanced_displayfunds",
+      "toNode": "n_sip_calculator_enhanced_selectfund",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_displayfunds_sip_calculator_enhanced_fetchmarketdata",
+      "fromNode": "n_sip_calculator_enhanced_displayfunds",
+      "toNode": "n_sip_calculator_enhanced_fetchmarketdata",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_displayfunds_sip_calculator_enhanced_filterfunds",
+      "fromNode": "n_sip_calculator_enhanced_displayfunds",
+      "toNode": "n_sip_calculator_enhanced_filterfunds",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_fetchmarketdata_sip_calculator_enhanced_filterfunds",
+      "fromNode": "n_sip_calculator_enhanced_fetchmarketdata",
+      "toNode": "n_sip_calculator_enhanced_filterfunds",
+      "label": "shares_data_with [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_fmtpct_sip_calculator_enhanced_selectfund",
+      "fromNode": "n_sip_calculator_enhanced_fmtpct",
+      "toNode": "n_sip_calculator_enhanced_selectfund",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_selectfund_sip_calculator_enhanced_usefundreturns",
+      "fromNode": "n_sip_calculator_enhanced_selectfund",
+      "toNode": "n_sip_calculator_enhanced_usefundreturns",
+      "label": "shares_data_with [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_calculatesip_sip_calculator_drawpiechart",
+      "fromNode": "n_sip_calculator_calculatesip",
+      "toNode": "n_sip_calculator_drawpiechart",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_calculatesip_sip_calculator_formatnumber",
+      "fromNode": "n_sip_calculator_calculatesip",
+      "toNode": "n_sip_calculator_formatnumber",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_calculatesip_sip_calculator_enhanced_calculatesip",
+      "fromNode": "n_sip_calculator_calculatesip",
+      "toNode": "n_sip_calculator_enhanced_calculatesip",
+      "label": "semantically_similar_to [INFERRED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_calculatesip_sip_calculator_enhanced_formatnumber",
+      "fromNode": "n_sip_calculator_enhanced_calculatesip",
+      "toNode": "n_sip_calculator_enhanced_formatnumber",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_formatnumber_sip_calculator_formatnumber",
+      "fromNode": "n_sip_calculator_enhanced_formatnumber",
+      "toNode": "n_sip_calculator_formatnumber",
+      "label": "semantically_similar_to [INFERRED]"
+    },
+    {
+      "id": "e_sip_calculator_enhanced_resetform_sip_calculator_resetform",
+      "fromNode": "n_sip_calculator_enhanced_resetform",
+      "toNode": "n_sip_calculator_resetform",
+      "label": "semantically_similar_to [INFERRED]"
+    }
+  ]
+}

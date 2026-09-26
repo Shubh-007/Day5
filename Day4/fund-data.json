@@ -1,0 +1,51 @@
+{
+  "fetchedAt": "2026-09-19T05:10:18.553295+00:00",
+  "source": "https://api.mfapi.in/",
+  "funds": [
+    {
+      "name": "HDFC Flexi Cap Fund - Direct Plan - Growth Option",
+      "schemeCode": 118955,
+      "nav": 2242.757,
+      "navDate": "18-09-2026",
+      "returns1Year": -0.2,
+      "returns3Year": 15.3,
+      "returns5Year": 16.9
+    },
+    {
+      "name": "ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund) - Direct Plan - Growth",
+      "schemeCode": 120586,
+      "nav": 116.39,
+      "navDate": "18-09-2026",
+      "returns1Year": -6.0,
+      "returns3Year": 10.3,
+      "returns5Year": 10.9
+    },
+    {
+      "name": "Axis Large Cap Fund - Direct Plan - Growth Option",
+      "schemeCode": 120465,
+      "nav": 68.5,
+      "navDate": "18-09-2026",
+      "returns1Year": -4.1,
+      "returns3Year": 8.8,
+      "returns5Year": 5.5
+    },
+    {
+      "name": "SBI Large Cap Fund - Direct Plan - Growth",
+      "schemeCode": 119598,
+      "nav": 101.7674,
+      "navDate": "18-09-2026",
+      "returns1Year": -2.6,
+      "returns3Year": 8.8,
+      "returns5Year": 8.9
+    },
+    {
+      "name": "Mirae Asset Large Cap Fund - Direct Plan - Growth",
+      "schemeCode": 118825,
+      "nav": 124.851,
+      "navDate": "18-09-2026",
+      "returns1Year": -4.2,
+      "returns3Year": 8.3,
+      "returns5Year": 7.7
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .currency {
+            position: absolute;
+            left: 12px;
+            color: #999;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .input-wrapper input {
+            padding-left: 35px;
+        }
+
+        .results {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 32px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-label {
+            color: #666;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .result-value {
+            color: #333;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .result-item.total-amount .result-value {
+            color: #667eea;
+            font-size: 20px;
+        }
+
+        .breakdown {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .breakdown-label {
+            color: #666;
+        }
+
+        .breakdown-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .reset-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .reset-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .info-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        .chart-container {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #ddd;
+        }
+
+        .chart-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .pie-chart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 16px 0;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .legend {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 SIP Calculator</h1>
+
+        <form id="sipForm">
+            <div class="form-group">
+                <label for="monthlyInvestment">Monthly Investment Amount</label>
+                <div class="input-wrapper">
+                    <span class="currency">₹</span>
+                    <input type="number" id="monthlyInvestment" min="1" value="5000" required>
+                </div>
+                <div class="info-text">Amount you want to invest every month</div>
+            </div>
+
+            <div class="form-group">
+                <label for="annualReturn">Annual Rate of Return (%)</label>
+                <input type="number" id="annualReturn" min="0" max="100" step="0.1" value="12" required>
+                <div class="info-text">Expected annual return percentage</div>
+            </div>
+
+            <div class="form-group">
+                <label for="investmentPeriod">Investment Period</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" id="investmentPeriod" min="1" value="10" required style="flex: 1;">
+                    <select id="periodUnit" style="flex: 1; width: auto;">
+                        <option value="years">Years</option>
+                        <option value="months">Months</option>
+                    </select>
+                </div>
+                <div class="info-text">How long you plan to invest</div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="calculate-btn" onclick="calculateSIP()">Calculate</button>
+                <button type="reset" class="reset-btn" onclick="resetForm()">Reset</button>
+            </div>
+        </form>
+
+        <div id="results" class="results hidden">
+            <div class="result-item total-amount">
+                <span class="result-label">Total Investment Value</span>
+                <span class="result-value">₹<span id="totalValue">0</span></span>
+            </div>
+
+            <div class="breakdown">
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Total Amount Invested:</span>
+                    <span class="breakdown-value">₹<span id="investedAmount">0</span></span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Interest Earned:</span>
+                    <span class="breakdown-value">₹<span id="interestEarned">0</span></span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Total Investment Period:</span>
+                    <span class="breakdown-value"><span id="periodDisplay">0</span></span>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Investment Breakdown</div>
+                <div class="pie-chart">
+                    <svg width="150" height="150" viewBox="0 0 150 150" id="pieChart"></svg>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #667eea;"></div>
+                            <span>Amount Invested</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #764ba2;"></div>
+                            <span>Interest Earned</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateSIP() {
+            const monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value);
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value);
+            const investmentPeriod = parseFloat(document.getElementById('investmentPeriod').value);
+            const periodUnit = document.getElementById('periodUnit').value;
+
+            if (!monthlyInvestment || !annualReturn || !investmentPeriod) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            // Convert period to months
+            const months = periodUnit === 'years' ? investmentPeriod * 12 : investmentPeriod;
+
+            // Monthly return rate
+            const monthlyRate = annualReturn / 100 / 12;
+
+            // SIP Formula: FV = PMT × [((1 + r)^n - 1) / r] × (1 + r)
+            let totalValue;
+            if (monthlyRate === 0) {
+                totalValue = monthlyInvestment * months;
+            } else {
+                totalValue = monthlyInvestment * (((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate));
+            }
+
+            const totalInvested = monthlyInvestment * months;
+            const interestEarned = totalValue - totalInvested;
+
+            // Update results
+            document.getElementById('totalValue').textContent = formatNumber(totalValue);
+            document.getElementById('investedAmount').textContent = formatNumber(totalInvested);
+            document.getElementById('interestEarned').textContent = formatNumber(interestEarned);
+            document.getElementById('periodDisplay').textContent = `${investmentPeriod} ${periodUnit}`;
+
+            // Show results
+            document.getElementById('results').classList.remove('hidden');
+
+            // Draw pie chart
+            drawPieChart(totalInvested, interestEarned);
+        }
+
+        function formatNumber(num) {
+            return Math.round(num).toLocaleString('en-IN');
+        }
+
+        function drawPieChart(invested, interest) {
+            const total = invested + interest;
+            const investedPercentage = (invested / total) * 100;
+            const interestPercentage = (interest / total) * 100;
+
+            // Convert to angles
+            const investedAngle = (investedPercentage / 100) * 360;
+
+            // SVG pie chart
+            const svg = document.getElementById('pieChart');
+            svg.innerHTML = '';
+
+            const centerX = 75;
+            const centerY = 75;
+            const radius = 60;
+
+            // Draw invested portion
+            const x1 = centerX + radius * Math.cos(-Math.PI / 2);
+            const y1 = centerY + radius * Math.sin(-Math.PI / 2);
+
+            const investedEndAngle = (investedAngle - 90) * Math.PI / 180;
+            const x2 = centerX + radius * Math.cos(investedEndAngle);
+            const y2 = centerY + radius * Math.sin(investedEndAngle);
+
+            const largeArc = investedAngle > 180 ? 1 : 0;
+
+            const pathData = `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+
+            const investedPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            investedPath.setAttribute('d', pathData);
+            investedPath.setAttribute('fill', '#667eea');
+            svg.appendChild(investedPath);
+
+            // Draw interest portion
+            const interestPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const largeArc2 = interestPercentage > 50 ? 1 : 0;
+            const pathData2 = `M ${centerX} ${centerY} L ${x2} ${y2} A ${radius} ${radius} 0 ${largeArc2} 1 ${x1} ${y1} Z`;
+            interestPath.setAttribute('d', pathData2);
+            interestPath.setAttribute('fill', '#764ba2');
+            svg.appendChild(interestPath);
+
+            // Add border
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', centerX);
+            circle.setAttribute('cy', centerY);
+            circle.setAttribute('r', radius);
+            circle.setAttribute('fill', 'none');
+            circle.setAttribute('stroke', '#e0e0e0');
+            circle.setAttribute('stroke-width', '1');
+            svg.appendChild(circle);
+        }
+
+        function resetForm() {
+            document.getElementById('sipForm').reset();
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('monthlyInvestment').value = '5000';
+            document.getElementById('annualReturn').value = '12';
+            document.getElementById('investmentPeriod').value = '10';
+        }
+
+        // Calculate on Enter key
+        document.getElementById('sipForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateSIP();
+            }
+        });
+    </script>
+</body>
+</html>
