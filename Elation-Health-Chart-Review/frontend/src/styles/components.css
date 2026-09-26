@@ -1,0 +1,223 @@
+/* Patient Card */
+.patient-card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 4px solid var(--primary-blue);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.patient-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--box-shadow-lg);
+}
+
+.patient-card.has-high-alert {
+  border-left-color: var(--danger-red);
+  background: #fef2f2;
+}
+
+.card-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--neutral-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.card-header h4 {
+  margin: 0;
+  color: var(--neutral-900);
+  font-size: 1.1rem;
+}
+
+.card-mrn {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.8rem;
+  color: var(--neutral-500);
+}
+
+.visit-badge {
+  background: var(--primary-blue);
+  color: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: calc(var(--border-radius) - 2px);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.visit-badge.overdue {
+  background: var(--danger-red);
+}
+
+.card-body {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.patient-demographics {
+  font-size: 0.9rem;
+  color: var(--neutral-600);
+  margin: 0;
+}
+
+.conditions-section {
+  font-size: 0.9rem;
+  color: var(--neutral-700);
+  line-height: 1.4;
+}
+
+.conditions-section strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--neutral-900);
+}
+
+.labs-warning {
+  color: var(--danger-red);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  background: #fee2e2;
+  border-radius: calc(var(--border-radius) - 2px);
+}
+
+.alerts-count {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.card-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--neutral-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--neutral-50);
+}
+
+.meds-count {
+  font-size: 0.85rem;
+  color: var(--neutral-600);
+  font-weight: 500;
+}
+
+.view-btn {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: calc(var(--border-radius) - 2px);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* Alert Banner */
+.alert-banner {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 0.75rem;
+  border-left: 4px solid var(--warning-yellow);
+  background: #fef3c7;
+}
+
+.alert-banner.alert-high {
+  border-left-color: var(--danger-red);
+  background: #fee2e2;
+}
+
+.alert-banner.alert-medium {
+  border-left-color: var(--warning-yellow);
+  background: #fef3c7;
+}
+
+.alert-banner.alert-low {
+  border-left-color: var(--primary-blue);
+  background: #dbeafe;
+}
+
+.alert-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-content strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--neutral-900);
+}
+
+.alert-content p {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.9rem;
+  color: var(--neutral-700);
+}
+
+/* Loading Spinner */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  min-height: 400px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--neutral-200);
+  border-top: 4px solid var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  color: var(--neutral-600);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .card-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .view-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

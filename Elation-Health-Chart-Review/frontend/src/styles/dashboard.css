@@ -1,0 +1,123 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.header-stats {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+}
+
+.stat {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 4px solid var(--primary-blue);
+}
+
+.stat.critical {
+  border-left-color: var(--danger-red);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+}
+
+.stat.critical .stat-value {
+  color: var(--danger-red);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.refresh-btn {
+  background: var(--primary-blue);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.refresh-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow-lg);
+}
+
+.alerts-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border-left: 4px solid var(--danger-red);
+}
+
+.alerts-section h3 {
+  margin-bottom: 1rem;
+  color: var(--neutral-900);
+}
+
+.patients-grid h3 {
+  margin-bottom: 1.5rem;
+  color: var(--neutral-900);
+  font-size: 1.1rem;
+}
+
+.patient-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard-footer {
+  text-align: center;
+  color: var(--neutral-500);
+  font-size: 0.85rem;
+  padding: 1rem;
+  border-top: 1px solid var(--neutral-200);
+  margin-top: 2rem;
+}
+
+.error-message {
+  background: var(--danger-red);
+  color: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-stats {
+    flex-direction: column;
+  }
+
+  .patient-list {
+    grid-template-columns: 1fr;
+  }
+}
