@@ -143,13 +143,19 @@ def root():
     }
 
 
+from pydantic import BaseModel
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
 @app.post("/api/auth/login")
-def login(username: str, password: str):
+def login(req: LoginRequest):
     """Authenticate a user and return a JWT access token."""
-    user = authenticate_user(username, password)
+    user = authenticate_user(req.username, req.password)
     if not user:
         log_access(
-            user=username,
+            user=req.username,
             role="unknown",
             action="LOGIN_FAILED",
             mrn=None,
