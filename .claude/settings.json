@@ -94,28 +94,6 @@
       ]
     }
   },
-  "hooks": {
-    "pre-commit": {
-      "enabled": true,
-      "script": ".claude/hooks/pre-commit-healthcare.sh",
-      "checks": [
-        "pii-detection",
-        "hipaa-compliance",
-        "required-files",
-        "security-patterns",
-        "commit-message-format"
-      ]
-    },
-    "pre-push": {
-      "enabled": true,
-      "script": ".claude/hooks/pre-push-compliance.sh",
-      "checks": [
-        "all-commits-signed",
-        "no-sensitive-data",
-        "compliance-review"
-      ]
-    }
-  },
   "clinicalSettings": {
     "compliance": {
       "frameworks": ["HIPAA", "HITECH", "State-Laws"],

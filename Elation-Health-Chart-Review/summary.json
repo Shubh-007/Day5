@@ -1,0 +1,1162 @@
+{
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {
+            "Dashboard - Load all patient summaries": {
+                "name": "Dashboard - Load all patient summaries",
+                "path": "::Dashboard - Load all patient summaries",
+                "id": "b50526d3f42933eb5ca735ebf90af9c2",
+                "groups": {},
+                "checks": {
+                        "dashboard loaded": {
+                            "id": "060b6a4ae20622e095fedbf60d0adbd6",
+                            "passes": 2334,
+                            "fails": 0,
+                            "name": "dashboard loaded",
+                            "path": "::Dashboard - Load all patient summaries::dashboard loaded"
+                        },
+                        "has patients": {
+                            "passes": 2334,
+                            "fails": 0,
+                            "name": "has patients",
+                            "path": "::Dashboard - Load all patient summaries::has patients",
+                            "id": "c10d2b3877770a3b4ee1688e07213bd0"
+                        },
+                        "response time < 2s": {
+                            "name": "response time < 2s",
+                            "path": "::Dashboard - Load all patient summaries::response time < 2s",
+                            "id": "4a3c78d5485efd82f30edc24544cd93e",
+                            "passes": 2334,
+                            "fails": 0
+                        },
+                        "returns 3 patients": {
+                            "name": "returns 3 patients",
+                            "path": "::Dashboard - Load all patient summaries::returns 3 patients",
+                            "id": "f171537f3f694dba2cb3039bdb87bab7",
+                            "passes": 2334,
+                            "fails": 0
+                        }
+                    }
+            },
+            "Clinical Context - Get context for P001234": {
+                "id": "9b0c8d5aa23105f35f841228cd3f6791",
+                "groups": {},
+                "checks": {
+                        "context retrieved": {
+                            "name": "context retrieved",
+                            "path": "::Clinical Context - Get context for P001234::context retrieved",
+                            "id": "c7bd0e1ffded9176d66d8e6f8c694fb4",
+                            "passes": 789,
+                            "fails": 0
+                        },
+                        "has problems": {
+                            "name": "has problems",
+                            "path": "::Clinical Context - Get context for P001234::has problems",
+                            "id": "43ef2319ac8d5fe0a96cd9558f91e23d",
+                            "passes": 789,
+                            "fails": 0
+                        },
+                        "has medications": {
+                            "name": "has medications",
+                            "path": "::Clinical Context - Get context for P001234::has medications",
+                            "id": "5875549bb32d9528ce24b8fe8351061c",
+                            "passes": 789,
+                            "fails": 0
+                        },
+                        "has alerts": {
+                            "fails": 0,
+                            "name": "has alerts",
+                            "path": "::Clinical Context - Get context for P001234::has alerts",
+                            "id": "60fd1e3166fe90a3cdbd3a8ec906536a",
+                            "passes": 789
+                        },
+                        "response time < 100ms": {
+                            "name": "response time < 100ms",
+                            "path": "::Clinical Context - Get context for P001234::response time < 100ms",
+                            "id": "1db29881600f0af571eeb518e8cf78c5",
+                            "passes": 789,
+                            "fails": 0
+                        }
+                    },
+                "name": "Clinical Context - Get context for P001234",
+                "path": "::Clinical Context - Get context for P001234"
+            },
+            "Condition Profile - I50.9": {
+                "name": "Condition Profile - I50.9",
+                "path": "::Condition Profile - I50.9",
+                "id": "197a27d379bddd1e825c952175ac5a9e",
+                "groups": {},
+                "checks": {
+                        "condition found": {
+                            "name": "condition found",
+                            "path": "::Condition Profile - I50.9::condition found",
+                            "id": "6402490450974a7b9d1bd3149ba9229f",
+                            "passes": 472,
+                            "fails": 0
+                        },
+                        "has name": {
+                            "name": "has name",
+                            "path": "::Condition Profile - I50.9::has name",
+                            "id": "93fa7f2acaa15c80bb309b785d8e59c2",
+                            "passes": 472,
+                            "fails": 0
+                        },
+                        "has management": {
+                            "name": "has management",
+                            "path": "::Condition Profile - I50.9::has management",
+                            "id": "0cd8ce4d7cfa479d015ed4f647221587",
+                            "passes": 472,
+                            "fails": 0
+                        },
+                        "response time < 50ms": {
+                            "passes": 472,
+                            "fails": 0,
+                            "name": "response time < 50ms",
+                            "path": "::Condition Profile - I50.9::response time < 50ms",
+                            "id": "8a538ea15c255115a78fdcaec9059028"
+                        }
+                    }
+            },
+            "Drug Interactions - Lisinopril, Metformin": {
+                "name": "Drug Interactions - Lisinopril, Metformin",
+                "path": "::Drug Interactions - Lisinopril, Metformin",
+                "id": "b079f7542245a00071ece0399f4601e0",
+                "groups": {},
+                "checks": {
+                        "interactions checked": {
+                            "name": "interactions checked",
+                            "path": "::Drug Interactions - Lisinopril, Metformin::interactions checked",
+                            "id": "ade5254d079a530ec018e5f6528d719b",
+                            "passes": 0,
+                            "fails": 602
+                        },
+                        "has total_interactions": {
+                            "name": "has total_interactions",
+                            "path": "::Drug Interactions - Lisinopril, Metformin::has total_interactions",
+                            "id": "29d2052be590d2ee75c1cd7febc4aec1",
+                            "passes": 0,
+                            "fails": 602
+                        },
+                        "response time < 50ms": {
+                            "fails": 0,
+                            "name": "response time < 50ms",
+                            "path": "::Drug Interactions - Lisinopril, Metformin::response time < 50ms",
+                            "id": "349de7c707ccdcfb7cadae3b832a0122",
+                            "passes": 602
+                        }
+                    }
+            },
+            "RAG Retrieval - diabetes management": {
+                "path": "::RAG Retrieval - diabetes management",
+                "id": "cbe6bea10983dd6c1dec4b93ae437614",
+                "groups": {},
+                "checks": {
+                        "retrieval successful": {
+                            "name": "retrieval successful",
+                            "path": "::RAG Retrieval - diabetes management::retrieval successful",
+                            "id": "a1308e8920f8b123a09534629988ad35",
+                            "passes": 784,
+                            "fails": 0
+                        },
+                        "has results": {
+                            "fails": 0,
+                            "name": "has results",
+                            "path": "::RAG Retrieval - diabetes management::has results",
+                            "id": "ca3a4d12bcd56cdafbd96ceed28e8aef",
+                            "passes": 784
+                        },
+                        "response time < 100ms": {
+                            "name": "response time < 100ms",
+                            "path": "::RAG Retrieval - diabetes management::response time < 100ms",
+                            "id": "5d7cbfb99424a1766d50e9ed14dd5efd",
+                            "passes": 784,
+                            "fails": 0
+                        }
+                    },
+                "name": "RAG Retrieval - diabetes management"
+            },
+            "Safety Alerts - P009012": {
+                "id": "0d3ec6cd7d33198c7e9d99e6195980d6",
+                "groups": {},
+                "checks": {
+                        "alerts retrieved": {
+                            "name": "alerts retrieved",
+                            "path": "::Safety Alerts - P009012::alerts retrieved",
+                            "id": "d82ef4751b7b9b32abcf5815d414b6ee",
+                            "passes": 776,
+                            "fails": 0
+                        },
+                        "has alert count": {
+                            "fails": 0,
+                            "name": "has alert count",
+                            "path": "::Safety Alerts - P009012::has alert count",
+                            "id": "c465565aae8fc4d02a2a29ae47b8a15e",
+                            "passes": 776
+                        },
+                        "response time < 50ms": {
+                            "name": "response time < 50ms",
+                            "path": "::Safety Alerts - P009012::response time < 50ms",
+                            "id": "5d0c73008eaa80158aec27bc8f3f03c8",
+                            "passes": 772,
+                            "fails": 4
+                        }
+                    },
+                "name": "Safety Alerts - P009012",
+                "path": "::Safety Alerts - P009012"
+            },
+            "Lab Trends - P005678 creatinine": {
+                "checks": {
+                    "trends retrieved": {
+                        "name": "trends retrieved",
+                        "path": "::Lab Trends - P005678 creatinine::trends retrieved",
+                        "id": "e2b2b463c30be993159608b8626da722",
+                        "passes": 0,
+                        "fails": 256
+                    },
+                    "has values": {
+                        "name": "has values",
+                        "path": "::Lab Trends - P005678 creatinine::has values",
+                        "id": "15d7d28dfe39de1a5d2695058a6a76a1",
+                        "passes": 0,
+                        "fails": 256
+                    },
+                    "response time < 100ms": {
+                        "name": "response time < 100ms",
+                        "path": "::Lab Trends - P005678 creatinine::response time < 100ms",
+                        "id": "d638a8a281f7cb3fa97a1286ff2e13fc",
+                        "passes": 256,
+                        "fails": 0
+                    }
+                },
+                "name": "Lab Trends - P005678 creatinine",
+                "path": "::Lab Trends - P005678 creatinine",
+                "id": "0314568075b468ac7b72a705773f47e0",
+                "groups": {}
+            },
+            "Search Records - blood pressure": {
+                "name": "Search Records - blood pressure",
+                "path": "::Search Records - blood pressure",
+                "id": "5f3ef159ff23341f7cb55ab9a2c33c3b",
+                "groups": {},
+                "checks": {
+                        "search completed": {
+                            "name": "search completed",
+                            "path": "::Search Records - blood pressure::search completed",
+                            "id": "fe4fef8523d91388f3c8c87f530e63cc",
+                            "passes": 809,
+                            "fails": 0
+                        },
+                        "has results": {
+                            "name": "has results",
+                            "path": "::Search Records - blood pressure::has results",
+                            "id": "0222e9764f5fd200506c69e5261cd710",
+                            "passes": 809,
+                            "fails": 0
+                        },
+                        "response time < 200ms": {
+                            "passes": 809,
+                            "fails": 0,
+                            "name": "response time < 200ms",
+                            "path": "::Search Records - blood pressure::response time < 200ms",
+                            "id": "01afa59c8f2d13414e2caf675a22c6e7"
+                        }
+                    }
+            },
+            "Clinical Context - Get context for P009012": {
+                "groups": {},
+                "checks": {
+                        "context retrieved": {
+                            "path": "::Clinical Context - Get context for P009012::context retrieved",
+                            "id": "53bc1b6a1442e0902603ba282a410d4c",
+                            "passes": 747,
+                            "fails": 0,
+                            "name": "context retrieved"
+                        },
+                        "has problems": {
+                            "passes": 747,
+                            "fails": 0,
+                            "name": "has problems",
+                            "path": "::Clinical Context - Get context for P009012::has problems",
+                            "id": "4da6859451a6893834fb9423b82c087e"
+                        },
+                        "has medications": {
+                            "fails": 0,
+                            "name": "has medications",
+                            "path": "::Clinical Context - Get context for P009012::has medications",
+                            "id": "7099e7642936e8c04bd70277f1f829a9",
+                            "passes": 747
+                        },
+                        "has alerts": {
+                            "path": "::Clinical Context - Get context for P009012::has alerts",
+                            "id": "304fc272a3f3a9d690b9fbfa9c6aeeeb",
+                            "passes": 747,
+                            "fails": 0,
+                            "name": "has alerts"
+                        },
+                        "response time < 100ms": {
+                            "name": "response time < 100ms",
+                            "path": "::Clinical Context - Get context for P009012::response time < 100ms",
+                            "id": "23bd47beb97ac35d90c09bf0dbf19073",
+                            "passes": 745,
+                            "fails": 2
+                        }
+                    },
+                "name": "Clinical Context - Get context for P009012",
+                "path": "::Clinical Context - Get context for P009012",
+                "id": "d117620c1ecb34219d84751f564f07ba"
+            },
+            "Condition Profile - F41.1": {
+                "groups": {},
+                "checks": {
+                        "condition found": {
+                            "passes": 482,
+                            "fails": 0,
+                            "name": "condition found",
+                            "path": "::Condition Profile - F41.1::condition found",
+                            "id": "107ea7a8cedbd4186c9817678d22ea0f"
+                        },
+                        "has name": {
+                            "path": "::Condition Profile - F41.1::has name",
+                            "id": "f0e335e00fddca9055f7c19aa8220f53",
+                            "passes": 482,
+                            "fails": 0,
+                            "name": "has name"
+                        },
+                        "has management": {
+                            "id": "a48d6f11d18902b6763254969cb0f667",
+                            "passes": 482,
+                            "fails": 0,
+                            "name": "has management",
+                            "path": "::Condition Profile - F41.1::has management"
+                        },
+                        "response time < 50ms": {
+                            "fails": 2,
+                            "name": "response time < 50ms",
+                            "path": "::Condition Profile - F41.1::response time < 50ms",
+                            "id": "6f93bb823a41b806b1b90c4109164a11",
+                            "passes": 480
+                        }
+                    },
+                "name": "Condition Profile - F41.1",
+                "path": "::Condition Profile - F41.1",
+                "id": "d4901e15f0af5bae084c112fb9a35294"
+            },
+            "Drug Interactions - Metoprolol, Aspirin": {
+                "groups": {},
+                "checks": {
+                        "interactions checked": {
+                            "name": "interactions checked",
+                            "path": "::Drug Interactions - Metoprolol, Aspirin::interactions checked",
+                            "id": "657e2f710e265ee85a604e715ee3714b",
+                            "passes": 0,
+                            "fails": 550
+                        },
+                        "has total_interactions": {
+                            "name": "has total_interactions",
+                            "path": "::Drug Interactions - Metoprolol, Aspirin::has total_interactions",
+                            "id": "0cbcf5329a6db92c1aaa1f17a4759137",
+                            "passes": 0,
+                            "fails": 550
+                        },
+                        "response time < 50ms": {
+                            "id": "05dec15157bd4b0f856365f08e242eba",
+                            "passes": 548,
+                            "fails": 2,
+                            "name": "response time < 50ms",
+                            "path": "::Drug Interactions - Metoprolol, Aspirin::response time < 50ms"
+                        }
+                    },
+                "name": "Drug Interactions - Metoprolol, Aspirin",
+                "path": "::Drug Interactions - Metoprolol, Aspirin",
+                "id": "cea481265db4437c4cfb611ef6f0bb2c"
+            },
+            "RAG Retrieval - hypertension treatment": {
+                "name": "RAG Retrieval - hypertension treatment",
+                "path": "::RAG Retrieval - hypertension treatment",
+                "id": "dd88336b9094ae899078131712cb23a3",
+                "groups": {},
+                "checks": {
+                        "retrieval successful": {
+                            "name": "retrieval successful",
+                            "path": "::RAG Retrieval - hypertension treatment::retrieval successful",
+                            "id": "68ee6099265743a4ed903f082e2fbb99",
+                            "passes": 790,
+                            "fails": 0
+                        },
+                        "has results": {
+                            "name": "has results",
+                            "path": "::RAG Retrieval - hypertension treatment::has results",
+                            "id": "e6acdb2a1fff191bd569456bd58fefd5",
+                            "passes": 790,
+                            "fails": 0
+                        },
+                        "response time < 100ms": {
+                            "id": "4a6e090831052fab6ca69f3f08b21fba",
+                            "passes": 790,
+                            "fails": 0,
+                            "name": "response time < 100ms",
+                            "path": "::RAG Retrieval - hypertension treatment::response time < 100ms"
+                        }
+                    }
+            },
+            "Condition Profile - E78.5": {
+                "name": "Condition Profile - E78.5",
+                "path": "::Condition Profile - E78.5",
+                "id": "e1c760e5cbd792f969d04862f15ba3df",
+                "groups": {},
+                "checks": {
+                        "condition found": {
+                            "name": "condition found",
+                            "path": "::Condition Profile - E78.5::condition found",
+                            "id": "dd000004a4d0feec8fca009cb5f30225",
+                            "passes": 450,
+                            "fails": 0
+                        },
+                        "has name": {
+                            "fails": 0,
+                            "name": "has name",
+                            "path": "::Condition Profile - E78.5::has name",
+                            "id": "c0f5b05a4cab1c872505c0883d8565f0",
+                            "passes": 450
+                        },
+                        "has management": {
+                            "path": "::Condition Profile - E78.5::has management",
+                            "id": "7a77c16c616714b2b249b52ab1828fa2",
+                            "passes": 450,
+                            "fails": 0,
+                            "name": "has management"
+                        },
+                        "response time < 50ms": {
+                            "fails": 0,
+                            "name": "response time < 50ms",
+                            "path": "::Condition Profile - E78.5::response time < 50ms",
+                            "id": "a159f5e172f98aa9bdde3e4459984ccd",
+                            "passes": 450
+                        }
+                    }
+            },
+            "Safety Alerts - P005678": {
+                "name": "Safety Alerts - P005678",
+                "path": "::Safety Alerts - P005678",
+                "id": "a7019843580fb0155098f301691dac5a",
+                "groups": {},
+                "checks": {
+                        "alerts retrieved": {
+                            "name": "alerts retrieved",
+                            "path": "::Safety Alerts - P005678::alerts retrieved",
+                            "id": "fd811321dee563adf83844a01971b751",
+                            "passes": 769,
+                            "fails": 0
+                        },
+                        "has alert count": {
+                            "id": "21f1be8837c588de1ef1a20ae32a1235",
+                            "passes": 769,
+                            "fails": 0,
+                            "name": "has alert count",
+                            "path": "::Safety Alerts - P005678::has alert count"
+                        },
+                        "response time < 50ms": {
+                            "name": "response time < 50ms",
+                            "path": "::Safety Alerts - P005678::response time < 50ms",
+                            "id": "e81f496d32b7b136d4aa7e81f2653d4c",
+                            "passes": 769,
+                            "fails": 0
+                        }
+                    }
+            },
+            "Lab Trends - P005678 A1c": {
+                "name": "Lab Trends - P005678 A1c",
+                "path": "::Lab Trends - P005678 A1c",
+                "id": "50204bbb8d3923a38f08676f79bc1954",
+                "groups": {},
+                "checks": {
+                        "trends retrieved": {
+                            "path": "::Lab Trends - P005678 A1c::trends retrieved",
+                            "id": "af0820dfbf2ca7d4e899caf1af06995f",
+                            "passes": 0,
+                            "fails": 249,
+                            "name": "trends retrieved"
+                        },
+                        "has values": {
+                            "passes": 0,
+                            "fails": 249,
+                            "name": "has values",
+                            "path": "::Lab Trends - P005678 A1c::has values",
+                            "id": "5b6e976e886bf07723a5d48ee93ceca1"
+                        },
+                        "response time < 100ms": {
+                            "fails": 0,
+                            "name": "response time < 100ms",
+                            "path": "::Lab Trends - P005678 A1c::response time < 100ms",
+                            "id": "2c8d65d89d6bde17d34394b14b05c009",
+                            "passes": 249
+                        }
+                    }
+            },
+            "Lab Trends - P009012 creatinine": {
+                "name": "Lab Trends - P009012 creatinine",
+                "path": "::Lab Trends - P009012 creatinine",
+                "id": "c31f7f26ef6bad18611294d3a4fa7448",
+                "groups": {},
+                "checks": {
+                        "trends retrieved": {
+                            "name": "trends retrieved",
+                            "path": "::Lab Trends - P009012 creatinine::trends retrieved",
+                            "id": "56c97c911495aeec96b7f23fad0b1d7d",
+                            "passes": 253,
+                            "fails": 0
+                        },
+                        "has values": {
+                            "id": "e94e07fd1d5b2d325484a7433e6af0d8",
+                            "passes": 253,
+                            "fails": 0,
+                            "name": "has values",
+                            "path": "::Lab Trends - P009012 creatinine::has values"
+                        },
+                        "response time < 100ms": {
+                            "fails": 0,
+                            "name": "response time < 100ms",
+                            "path": "::Lab Trends - P009012 creatinine::response time < 100ms",
+                            "id": "98cafc8cd9b344dde6a0acebbca87941",
+                            "passes": 253
+                        }
+                    }
+            },
+            "Condition Profile - E11.9": {
+                "name": "Condition Profile - E11.9",
+                "path": "::Condition Profile - E11.9",
+                "id": "35eef604f539da40d6f9d54e3c58d631",
+                "groups": {},
+                "checks": {
+                        "condition found": {
+                            "path": "::Condition Profile - E11.9::condition found",
+                            "id": "6e9ac11b3a6c219e6ba5eafc8551efd1",
+                            "passes": 459,
+                            "fails": 0,
+                            "name": "condition found"
+                        },
+                        "has name": {
+                            "id": "fbf928ec1f92dcae74c33cc6317853f5",
+                            "passes": 459,
+                            "fails": 0,
+                            "name": "has name",
+                            "path": "::Condition Profile - E11.9::has name"
+                        },
+                        "has management": {
+                            "name": "has management",
+                            "path": "::Condition Profile - E11.9::has management",
+                            "id": "1033cae7f46c82383fa6e146669f1699",
+                            "passes": 459,
+                            "fails": 0
+                        },
+                        "response time < 50ms": {
+                            "fails": 4,
+                            "name": "response time < 50ms",
+                            "path": "::Condition Profile - E11.9::response time < 50ms",
+                            "id": "c96dad520f986cf01250e23068ce0b00",
+                            "passes": 455
+                        }
+                    }
+            },
+            "Clinical Context - Get context for P005678": {
+                "name": "Clinical Context - Get context for P005678",
+                "path": "::Clinical Context - Get context for P005678",
+                "id": "7a98f5e345ffdc1d35bbdca3daf70a89",
+                "groups": {},
+                "checks": {
+                        "context retrieved": {
+                            "id": "5780f6feabf800c65c47659992486c5b",
+                            "passes": 798,
+                            "fails": 0,
+                            "name": "context retrieved",
+                            "path": "::Clinical Context - Get context for P005678::context retrieved"
+                        },
+                        "has problems": {
+                            "name": "has problems",
+                            "path": "::Clinical Context - Get context for P005678::has problems",
+                            "id": "a8dff4ae327378f0dbad814d86721e82",
+                            "passes": 798,
+                            "fails": 0
+                        },
+                        "has medications": {
+                            "name": "has medications",
+                            "path": "::Clinical Context - Get context for P005678::has medications",
+                            "id": "30f6d440b2cf71f8650679e26b1c9a2e",
+                            "passes": 798,
+                            "fails": 0
+                        },
+                        "has alerts": {
+                            "fails": 0,
+                            "name": "has alerts",
+                            "path": "::Clinical Context - Get context for P005678::has alerts",
+                            "id": "69c8b2da2774b613bf27ddc80d374876",
+                            "passes": 798
+                        },
+                        "response time < 100ms": {
+                            "name": "response time < 100ms",
+                            "path": "::Clinical Context - Get context for P005678::response time < 100ms",
+                            "id": "24c3bc44adbba5265b80c2edff25ac87",
+                            "passes": 797,
+                            "fails": 1
+                        }
+                    }
+            },
+            "Safety Alerts - P001234": {
+                "name": "Safety Alerts - P001234",
+                "path": "::Safety Alerts - P001234",
+                "id": "7fad938734f975458a76d71da499ba60",
+                "groups": {},
+                "checks": {
+                        "alerts retrieved": {
+                            "name": "alerts retrieved",
+                            "path": "::Safety Alerts - P001234::alerts retrieved",
+                            "id": "0a0f955f05b7d23f52312dd7d907e73a",
+                            "passes": 789,
+                            "fails": 0
+                        },
+                        "has alert count": {
+                            "name": "has alert count",
+                            "path": "::Safety Alerts - P001234::has alert count",
+                            "id": "10f245e9752665571fadc2da0259237a",
+                            "passes": 789,
+                            "fails": 0
+                        },
+                        "response time < 50ms": {
+                            "id": "3072c5af9d155324e3a937d0f5ec85bd",
+                            "passes": 783,
+                            "fails": 6,
+                            "name": "response time < 50ms",
+                            "path": "::Safety Alerts - P001234::response time < 50ms"
+                        }
+                    }
+            },
+            "Search Records - A1c": {
+                "name": "Search Records - A1c",
+                "path": "::Search Records - A1c",
+                "id": "df7e3dea274d74c985ba91ce7703610c",
+                "groups": {},
+                "checks": {
+                        "search completed": {
+                            "fails": 0,
+                            "name": "search completed",
+                            "path": "::Search Records - A1c::search completed",
+                            "id": "8b627a51087849f84ed9fb9b9886647d",
+                            "passes": 781
+                        },
+                        "has results": {
+                            "name": "has results",
+                            "path": "::Search Records - A1c::has results",
+                            "id": "1a36a255ead0301f2e6488b2457665ee",
+                            "passes": 781,
+                            "fails": 0
+                        },
+                        "response time < 200ms": {
+                            "path": "::Search Records - A1c::response time < 200ms",
+                            "id": "3fb93f534304503ef086f0dea32201b5",
+                            "passes": 781,
+                            "fails": 0,
+                            "name": "response time < 200ms"
+                        }
+                    }
+            },
+            "Lab Trends - P001234 glucose": {
+                "groups": {},
+                "checks": {
+                        "trends retrieved": {
+                            "id": "146cceb682abb4a3e00ef7dbc42177ac",
+                            "passes": 264,
+                            "fails": 0,
+                            "name": "trends retrieved",
+                            "path": "::Lab Trends - P001234 glucose::trends retrieved"
+                        },
+                        "has values": {
+                            "path": "::Lab Trends - P001234 glucose::has values",
+                            "id": "0467946e41405d36440714f028a2ce98",
+                            "passes": 264,
+                            "fails": 0,
+                            "name": "has values"
+                        },
+                        "response time < 100ms": {
+                            "name": "response time < 100ms",
+                            "path": "::Lab Trends - P001234 glucose::response time < 100ms",
+                            "id": "bba714fc8d7c81bcb3b8949d2d427bd5",
+                            "passes": 264,
+                            "fails": 0
+                        }
+                    },
+                "name": "Lab Trends - P001234 glucose",
+                "path": "::Lab Trends - P001234 glucose",
+                "id": "df4833e8df4692560828a035135eb7d4"
+            },
+            "Search Records - medication change": {
+                "name": "Search Records - medication change",
+                "path": "::Search Records - medication change",
+                "id": "1dd1294fd02ec1f9e092aa41403c9fb5",
+                "groups": {},
+                "checks": {
+                        "search completed": {
+                            "path": "::Search Records - medication change::search completed",
+                            "id": "0353ed494756d4e35f1e20e005ae2dca",
+                            "passes": 744,
+                            "fails": 0,
+                            "name": "search completed"
+                        },
+                        "has results": {
+                            "passes": 744,
+                            "fails": 0,
+                            "name": "has results",
+                            "path": "::Search Records - medication change::has results",
+                            "id": "7030e4cee03cffab4e41be48a7b1ea90"
+                        },
+                        "response time < 200ms": {
+                            "name": "response time < 200ms",
+                            "path": "::Search Records - medication change::response time < 200ms",
+                            "id": "ab681ede4ee754646a1ad32f7aeed0db",
+                            "passes": 744,
+                            "fails": 0
+                        }
+                    }
+            },
+            "Lab Trends - P001234 A1c": {
+                "id": "c1be7b66044c7950e14f000bded3d774",
+                "groups": {},
+                "checks": {
+                        "trends retrieved": {
+                            "name": "trends retrieved",
+                            "path": "::Lab Trends - P001234 A1c::trends retrieved",
+                            "id": "2355ab2d497efa94a008896639e932b6",
+                            "passes": 243,
+                            "fails": 0
+                        },
+                        "has values": {
+                            "name": "has values",
+                            "path": "::Lab Trends - P001234 A1c::has values",
+                            "id": "376f05b5c0bcf6025b938c649c9a8e87",
+                            "passes": 243,
+                            "fails": 0
+                        },
+                        "response time < 100ms": {
+                            "name": "response time < 100ms",
+                            "path": "::Lab Trends - P001234 A1c::response time < 100ms",
+                            "id": "92a5095d708e97f0149a323066cfd750",
+                            "passes": 243,
+                            "fails": 0
+                        }
+                    },
+                "name": "Lab Trends - P001234 A1c",
+                "path": "::Lab Trends - P001234 A1c"
+            },
+            "Drug Interactions - Atorvastatin, Sertraline": {
+                "groups": {},
+                "checks": {
+                        "interactions checked": {
+                            "name": "interactions checked",
+                            "path": "::Drug Interactions - Atorvastatin, Sertraline::interactions checked",
+                            "id": "7d1da1471aef682d92f073406c4e056f",
+                            "passes": 0,
+                            "fails": 594
+                        },
+                        "has total_interactions": {
+                            "name": "has total_interactions",
+                            "path": "::Drug Interactions - Atorvastatin, Sertraline::has total_interactions",
+                            "id": "091f983e167c8657dd8fe5b759d0cf47",
+                            "passes": 0,
+                            "fails": 594
+                        },
+                        "response time < 50ms": {
+                            "path": "::Drug Interactions - Atorvastatin, Sertraline::response time < 50ms",
+                            "id": "798c893df879337a0cb282e035ca2316",
+                            "passes": 593,
+                            "fails": 1,
+                            "name": "response time < 50ms"
+                        }
+                    },
+                "name": "Drug Interactions - Atorvastatin, Sertraline",
+                "path": "::Drug Interactions - Atorvastatin, Sertraline",
+                "id": "9a9fd37bdef0526adaeeefed7cbfac54"
+            },
+            "RAG Retrieval - heart failure": {
+                "groups": {},
+                "checks": {
+                        "retrieval successful": {
+                            "name": "retrieval successful",
+                            "path": "::RAG Retrieval - heart failure::retrieval successful",
+                            "id": "8ebd3e7972369be14a113f435dc62d51",
+                            "passes": 760,
+                            "fails": 0
+                        },
+                        "has results": {
+                            "id": "16be4c94b87f658f8d09f3e19f88516f",
+                            "passes": 760,
+                            "fails": 0,
+                            "name": "has results",
+                            "path": "::RAG Retrieval - heart failure::has results"
+                        },
+                        "response time < 100ms": {
+                            "id": "b0cead7e91901434faf92157f9e61151",
+                            "passes": 760,
+                            "fails": 0,
+                            "name": "response time < 100ms",
+                            "path": "::RAG Retrieval - heart failure::response time < 100ms"
+                        }
+                    },
+                "name": "RAG Retrieval - heart failure",
+                "path": "::RAG Retrieval - heart failure",
+                "id": "763daf29c9b4d9c89549b5506792c86a"
+            },
+            "Lab Trends - P001234 creatinine": {
+                "name": "Lab Trends - P001234 creatinine",
+                "path": "::Lab Trends - P001234 creatinine",
+                "id": "ad136bf7a867efeac68ac55e28dda366",
+                "groups": {},
+                "checks": {
+                        "trends retrieved": {
+                            "id": "8edd48ba4cb6ec4437b2987d03820d54",
+                            "passes": 271,
+                            "fails": 0,
+                            "name": "trends retrieved",
+                            "path": "::Lab Trends - P001234 creatinine::trends retrieved"
+                        },
+                        "has values": {
+                            "name": "has values",
+                            "path": "::Lab Trends - P001234 creatinine::has values",
+                            "id": "6693096158aabb97b0905307c01281a0",
+                            "passes": 271,
+                            "fails": 0
+                        },
+                        "response time < 100ms": {
+                            "path": "::Lab Trends - P001234 creatinine::response time < 100ms",
+                            "id": "05819255d218981f59b320b65a7048e7",
+                            "passes": 271,
+                            "fails": 0,
+                            "name": "response time < 100ms"
+                        }
+                    }
+            },
+            "Lab Trends - P009012 glucose": {
+                "checks": {
+                    "trends retrieved": {
+                        "fails": 291,
+                        "name": "trends retrieved",
+                        "path": "::Lab Trends - P009012 glucose::trends retrieved",
+                        "id": "af36d5eedc0352f6b92ba4cd021a231a",
+                        "passes": 0
+                    },
+                    "has values": {
+                        "name": "has values",
+                        "path": "::Lab Trends - P009012 glucose::has values",
+                        "id": "eea1fb6b2609c8522fb16563ce7843a9",
+                        "passes": 0,
+                        "fails": 291
+                    },
+                    "response time < 100ms": {
+                        "name": "response time < 100ms",
+                        "path": "::Lab Trends - P009012 glucose::response time < 100ms",
+                        "id": "168d1b0312c59c68ee82b76d78aacf2b",
+                        "passes": 291,
+                        "fails": 0
+                    }
+                },
+                "name": "Lab Trends - P009012 glucose",
+                "path": "::Lab Trends - P009012 glucose",
+                "id": "236a54a8e07fd414064a4ce2b1fc0904",
+                "groups": {}
+            },
+            "Condition Profile - I10": {
+                "id": "704ade0a999c6720a4812cfa77dc94b9",
+                "groups": {},
+                "checks": {
+                        "condition found": {
+                            "name": "condition found",
+                            "path": "::Condition Profile - I10::condition found",
+                            "id": "e7c9b10715d3698f83ef8268a1d3facc",
+                            "passes": 471,
+                            "fails": 0
+                        },
+                        "has name": {
+                            "name": "has name",
+                            "path": "::Condition Profile - I10::has name",
+                            "id": "79b1f8e758beefa4f48224fee0a64d36",
+                            "passes": 471,
+                            "fails": 0
+                        },
+                        "has management": {
+                            "fails": 0,
+                            "name": "has management",
+                            "path": "::Condition Profile - I10::has management",
+                            "id": "953ef7a25181d7cf120f12bb8a6e0f9a",
+                            "passes": 471
+                        },
+                        "response time < 50ms": {
+                            "name": "response time < 50ms",
+                            "path": "::Condition Profile - I10::response time < 50ms",
+                            "id": "74148a742f5453961fb39c0922857f7f",
+                            "passes": 470,
+                            "fails": 1
+                        }
+                    },
+                "name": "Condition Profile - I10",
+                "path": "::Condition Profile - I10"
+            },
+            "Drug Interactions - Lisinopril, Atorvastatin, Metformin": {
+                "name": "Drug Interactions - Lisinopril, Atorvastatin, Metformin",
+                "path": "::Drug Interactions - Lisinopril, Atorvastatin, Metformin",
+                "id": "cca94dabd691b55ac2cbfedc3c717283",
+                "groups": {},
+                "checks": {
+                        "interactions checked": {
+                            "name": "interactions checked",
+                            "path": "::Drug Interactions - Lisinopril, Atorvastatin, Metformin::interactions checked",
+                            "id": "d1212ac5e84f27035946ae836dbfb00b",
+                            "passes": 0,
+                            "fails": 588
+                        },
+                        "has total_interactions": {
+                            "path": "::Drug Interactions - Lisinopril, Atorvastatin, Metformin::has total_interactions",
+                            "id": "63209380df2d1a301063b4fa99bd81c0",
+                            "passes": 0,
+                            "fails": 588,
+                            "name": "has total_interactions"
+                        },
+                        "response time < 50ms": {
+                            "name": "response time < 50ms",
+                            "path": "::Drug Interactions - Lisinopril, Atorvastatin, Metformin::response time < 50ms",
+                            "id": "52998768e806e76d63d0c1ad5a1a77ed",
+                            "passes": 587,
+                            "fails": 1
+                        }
+                    }
+            },
+            "Lab Trends - P009012 A1c": {
+                "checks": {
+                    "trends retrieved": {
+                        "path": "::Lab Trends - P009012 A1c::trends retrieved",
+                        "id": "40464b39b84daf0246e1b948e331853e",
+                        "passes": 0,
+                        "fails": 253,
+                        "name": "trends retrieved"
+                    },
+                    "has values": {
+                        "passes": 0,
+                        "fails": 253,
+                        "name": "has values",
+                        "path": "::Lab Trends - P009012 A1c::has values",
+                        "id": "0294b681e674cf8cb50a8b20e2aa3dc9"
+                    },
+                    "response time < 100ms": {
+                        "path": "::Lab Trends - P009012 A1c::response time < 100ms",
+                        "id": "95815d5d1df3eae6951b5488354142fb",
+                        "passes": 251,
+                        "fails": 2,
+                        "name": "response time < 100ms"
+                    }
+                },
+                "name": "Lab Trends - P009012 A1c",
+                "path": "::Lab Trends - P009012 A1c",
+                "id": "29679d5c74d58fbb7836dc4d367bce11",
+                "groups": {}
+            },
+            "Lab Trends - P005678 glucose": {
+                "name": "Lab Trends - P005678 glucose",
+                "path": "::Lab Trends - P005678 glucose",
+                "id": "ad3e5a0db03d1089ca511bbfe55bdc6d",
+                "groups": {},
+                "checks": {
+                        "trends retrieved": {
+                            "id": "cf89f39f3cd170888f5fc3e95cc882c6",
+                            "passes": 0,
+                            "fails": 254,
+                            "name": "trends retrieved",
+                            "path": "::Lab Trends - P005678 glucose::trends retrieved"
+                        },
+                        "has values": {
+                            "id": "39bf037223e778cbeedb81036c99ad07",
+                            "passes": 0,
+                            "fails": 254,
+                            "name": "has values",
+                            "path": "::Lab Trends - P005678 glucose::has values"
+                        },
+                        "response time < 100ms": {
+                            "name": "response time < 100ms",
+                            "path": "::Lab Trends - P005678 glucose::response time < 100ms",
+                            "id": "eb7ef99ae2e41e80d8661bf4fe729f83",
+                            "passes": 253,
+                            "fails": 1
+                        }
+                    }
+            }
+        },
+        "checks": {}
+    },
+    "metrics": {
+        "iteration_duration": {
+            "med": 4134.6852085,
+            "max": 4319.013178,
+            "p(90)": 4151.6615723,
+            "p(95)": 4164.9323153,
+            "avg": 4139.7627048586055,
+            "min": 4123.026108
+        },
+        "http_reqs": {
+            "count": 18672,
+            "rate": 88.47790084454054
+        },
+        "http_req_duration": {
+            "avg": 3.9092536653813137,
+            "min": 0.95766,
+            "med": 2.8351495,
+            "max": 142.374743,
+            "p(90)": 6.0766273,
+            "p(95)": 8.07208915,
+            "thresholds": {
+                "p(95)<500": false,
+                "p(99)<1000": false
+            }
+        },
+        "http_req_duration{expected_response:true}": {
+            "med": 3.022204,
+            "max": 142.374743,
+            "p(90)": 6.426507600000001,
+            "p(95)": 8.60387519999999,
+            "avg": 4.178364893648147,
+            "min": 1.167028
+        },
+        "http_req_sending": {
+            "avg": 0.04479200540916861,
+            "min": 0.009016,
+            "med": 0.039725,
+            "max": 2.9163,
+            "p(90)": 0.06127340000000005,
+            "p(95)": 0.07703825
+        },
+        "http_req_connecting": {
+            "p(95)": 0,
+            "avg": 0.0021139455869751502,
+            "min": 0,
+            "med": 0,
+            "max": 3.02946,
+            "p(90)": 0
+        },
+        "http_req_failed": {
+            "passes": 3637,
+            "fails": 15035,
+            "value": 0.19478363324764353
+        },
+        "tool_calls": {
+            "count": 4668,
+            "rate": 22.119475211135136
+        },
+        "data_received": {
+            "count": 21338063,
+            "rate": 101111.13015898454
+        },
+        "data_sent": {
+            "count": 2357483,
+            "rate": 11171.012591939267
+        },
+        "http_req_blocked": {
+            "p(90)": 0.015202,
+            "p(95)": 0.01854170000000002,
+            "avg": 0.015108067855612731,
+            "min": 0.003266,
+            "med": 0.0109385,
+            "max": 5.982854
+        },
+        "http_req_receiving": {
+            "avg": 0.12483521160025708,
+            "min": 0.020467,
+            "med": 0.1137645,
+            "max": 3.115997,
+            "p(90)": 0.16864400000000002,
+            "p(95)": 0.20371875000000003
+        },
+        "http_req_tls_handshaking": {
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0
+        },
+        "rag_latency": {
+            "max": 83.827108,
+            "p(90)": 6.5040778,
+            "p(95)": 8.73365995,
+            "avg": 4.009836034275919,
+            "min": 1.167028,
+            "med": 2.9772119999999997
+        },
+        "iterations": {
+            "count": 2334,
+            "rate": 11.059737605567568
+        },
+        "vus_max": {
+            "min": 100,
+            "max": 100,
+            "value": 100
+        },
+        "tool_latency": {
+            "min": 0.95766,
+            "med": 2.7607185,
+            "max": 142.374743,
+            "p(90)": 6.0214306,
+            "p(95)": 8.019854199999966,
+            "avg": 3.869279557197926
+        },
+        "http_req_duration{type:dashboard}": {
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "thresholds": {
+                "p(95)<2000": false
+            }
+        },
+        "group_duration": {
+            "med": 3.180868,
+            "max": 142.600361,
+            "p(90)": 6.391115600000002,
+            "p(95)": 8.38582565,
+            "avg": 4.244316227720638,
+            "min": 1.225549
+        },
+        "checks": {
+            "passes": 58051,
+            "fails": 7301,
+            "value": 0.8882819194515853
+        },
+        "vus": {
+            "value": 2,
+            "min": 1,
+            "max": 100
+        },
+        "http_req_waiting": {
+            "min": 0.826783,
+            "med": 2.6554515,
+            "max": 142.313479,
+            "p(90)": 5.901607600000002,
+            "p(95)": 7.893005250000012,
+            "avg": 3.739626448371915
+        },
+        "errors": {
+            "passes": 3637,
+            "fails": 15035,
+            "thresholds": {
+                "rate<0.1": true
+            },
+            "value": 0.19478363324764353
+        },
+        "dashboard_latency": {
+            "min": 1.657858,
+            "med": 3.0893815,
+            "max": 119.199806,
+            "p(90)": 5.9434674,
+            "p(95)": 7.620200649999998,
+            "avg": 4.048515945586977
+        }
+    }
+}
