@@ -1,0 +1,57 @@
+# Environment
+.env
+.env.local
+.env.*.local
+credentials.json
+*.pem
+*.key
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Data
+*.db
+*.sqlite
+temp/
+cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Healthcare specific - NEVER commit real patient data
+test_data/real_patients/
+*_real_data.json
+*.patient
+*_PHI.csv
+test_patients.db
+
+# Sensitive
+*.secrets
+*.credentials
+.ssh/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Medical images (large files)
+*.dicom
+*.dcm
+*.nii
