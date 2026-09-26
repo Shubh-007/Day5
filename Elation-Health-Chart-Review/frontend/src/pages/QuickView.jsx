@@ -303,14 +303,14 @@ function QuickView({ mrn, onBack }) {
           <p className="tip">💡 Tip: Review this summary in under 30 seconds before entering the exam room</p>
           <button className="action-btn" onClick={onBack}>Open Full Chart</button>
         </div>
-
-        {/* RAG Clinical Assistant Chatbot */}
-        <RAGChatbot
-          mrn={mrn}
-          patientName={summary.patientName}
-          patientData={summary}
-        />
       </div>
+
+      {/* RAG Clinical Assistant Chatbot */}
+      <RAGChatbot
+        mrn={mrn}
+        patientName={summary.patientName}
+        patientData={summary}
+      />
     </div>
   )
 }

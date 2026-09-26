@@ -477,6 +477,1111 @@
           "date": "2026-09-26"
         }
       ]
+    },
+    {
+      "mrn": "P002001",
+      "name": "Emily Watson",
+      "age": 28,
+      "gender": "F",
+      "problems": [
+        {
+          "icd10": "J45.901",
+          "diagnosis": "Unspecified asthma with (acute) exacerbation",
+          "status": "active",
+          "onsetDate": "2015-05-10",
+          "lastUpdated": "2026-09-20"
+        },
+        {
+          "icd10": "F41.1",
+          "diagnosis": "Generalized anxiety disorder",
+          "status": "active",
+          "onsetDate": "2020-03-15",
+          "lastUpdated": "2026-09-15"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Albuterol",
+          "dose": "90",
+          "unit": "mcg",
+          "frequency": "as needed",
+          "route": "inhaled",
+          "indication": "Asthma",
+          "startDate": "2015-05-20",
+          "status": "active"
+        },
+        {
+          "drugName": "Fluticasone/Salmeterol",
+          "dose": "45/21",
+          "unit": "mcg",
+          "frequency": "twice daily",
+          "route": "inhaled",
+          "indication": "Asthma maintenance",
+          "startDate": "2015-06-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Sertraline",
+          "dose": "50",
+          "unit": "mg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Anxiety disorder",
+          "startDate": "2020-04-01",
+          "status": "active"
+        }
+      ],
+      "allergies": [
+        {
+          "allergen": "Sulfonamides",
+          "reactionType": "rash",
+          "severity": "mild",
+          "recordedDate": "2018-11-05"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "2026-09-24",
+          "bloodPressure": "118/76",
+          "heartRate": "72",
+          "temperature": "98.4",
+          "weight": "125",
+          "height": "65",
+          "bmi": "20.8"
+        }
+      ],
+      "recentLabs": [
+        {
+          "testName": "FEV1",
+          "value": "88",
+          "unit": "%",
+          "referenceRange": ">80",
+          "date": "2026-09-10",
+          "abnormal": false
+        },
+        {
+          "testName": "CBC - WBC",
+          "value": "7.2",
+          "unit": "K/uL",
+          "referenceRange": "4.5-11.0",
+          "date": "2026-09-15",
+          "abnormal": false
+        }
+      ],
+      "recentNotes": [
+        {
+          "date": "2026-09-24",
+          "type": "Office Visit",
+          "provider": "Dr. Sarah Chen",
+          "summary": "Follow-up for asthma and anxiety. Patient reports well-controlled asthma with albuterol use 1-2x per week. Anxiety stable on sertraline. No acute exacerbations. Discussed exercise program and stress management techniques."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "screening_recommended",
+          "severity": "low",
+          "message": "Preventive care: Annual physical examination due",
+          "date": "2026-09-26"
+        }
+      ]
+    },
+    {
+      "mrn": "P002002",
+      "name": "Robert Mitchell",
+      "age": 78,
+      "gender": "M",
+      "problems": [
+        {
+          "icd10": "I50.9",
+          "diagnosis": "Congestive heart failure, unspecified",
+          "status": "active",
+          "onsetDate": "2019-02-14",
+          "lastUpdated": "2026-09-20"
+        },
+        {
+          "icd10": "I10",
+          "diagnosis": "Essential hypertension",
+          "status": "active",
+          "onsetDate": "2010-06-01",
+          "lastUpdated": "2026-09-18"
+        },
+        {
+          "icd10": "E11.22",
+          "diagnosis": "Type 2 diabetes with diabetic chronic kidney disease",
+          "status": "active",
+          "onsetDate": "2015-09-10",
+          "lastUpdated": "2026-09-22"
+        },
+        {
+          "icd10": "I25.10",
+          "diagnosis": "Atherosclerotic heart disease of native coronary artery",
+          "status": "active",
+          "onsetDate": "2018-04-05",
+          "lastUpdated": "2026-09-15"
+        },
+        {
+          "icd10": "J44.9",
+          "diagnosis": "Chronic obstructive pulmonary disease, unspecified",
+          "status": "active",
+          "onsetDate": "2012-11-20",
+          "lastUpdated": "2026-09-20"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Carvedilol",
+          "dose": "25",
+          "unit": "mg",
+          "frequency": "twice daily",
+          "route": "oral",
+          "indication": "Heart failure, hypertension",
+          "startDate": "2019-03-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Lisinopril",
+          "dose": "40",
+          "unit": "mg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Hypertension, CHF",
+          "startDate": "2010-07-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Furosemide",
+          "dose": "40",
+          "unit": "mg",
+          "frequency": "twice daily",
+          "route": "oral",
+          "indication": "Congestive heart failure",
+          "startDate": "2019-03-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Metoprolol",
+          "dose": "50",
+          "unit": "mg",
+          "frequency": "twice daily",
+          "route": "oral",
+          "indication": "Heart failure, angina",
+          "startDate": "2018-05-15",
+          "status": "active"
+        },
+        {
+          "drugName": "Insulin Glargine",
+          "dose": "28",
+          "unit": "units",
+          "frequency": "once daily at bedtime",
+          "route": "subcutaneous",
+          "indication": "Type 2 diabetes",
+          "startDate": "2022-01-10",
+          "status": "active"
+        },
+        {
+          "drugName": "Metformin",
+          "dose": "500",
+          "unit": "mg",
+          "frequency": "twice daily",
+          "route": "oral",
+          "indication": "Type 2 diabetes",
+          "startDate": "2015-10-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Atorvastatin",
+          "dose": "80",
+          "unit": "mg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Hyperlipidemia, CAD",
+          "startDate": "2018-05-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Aspirin",
+          "dose": "325",
+          "unit": "mg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "CAD prevention",
+          "startDate": "2018-05-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Tiotropium",
+          "dose": "18",
+          "unit": "mcg",
+          "frequency": "once daily",
+          "route": "inhaled",
+          "indication": "COPD",
+          "startDate": "2012-12-01",
+          "status": "active"
+        }
+      ],
+      "allergies": [
+        {
+          "allergen": "NSAIDs",
+          "reactionType": "GI bleeding",
+          "severity": "major",
+          "recordedDate": "2008-03-15"
+        },
+        {
+          "allergen": "Codeine",
+          "reactionType": "rash",
+          "severity": "mild",
+          "recordedDate": "2010-07-20"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "2026-09-22",
+          "bloodPressure": "158/92",
+          "heartRate": "68",
+          "temperature": "98.8",
+          "weight": "185",
+          "height": "70",
+          "bmi": "26.5"
+        }
+      ],
+      "recentLabs": [
+        {
+          "testName": "Hemoglobin A1c",
+          "value": "8.2",
+          "unit": "%",
+          "referenceRange": "<5.7",
+          "date": "2026-09-10",
+          "abnormal": true,
+          "trend": "up"
+        },
+        {
+          "testName": "Creatinine",
+          "value": "1.8",
+          "unit": "mg/dL",
+          "referenceRange": "0.7-1.3",
+          "date": "2026-09-10",
+          "abnormal": true,
+          "trend": "stable"
+        },
+        {
+          "testName": "eGFR",
+          "value": "38",
+          "unit": "mL/min/1.73m2",
+          "referenceRange": ">60",
+          "date": "2026-09-10",
+          "abnormal": true,
+          "trend": "down"
+        },
+        {
+          "testName": "BNP",
+          "value": "480",
+          "unit": "pg/mL",
+          "referenceRange": "<100",
+          "date": "2026-09-20",
+          "abnormal": true,
+          "trend": "up"
+        },
+        {
+          "testName": "Potassium",
+          "value": "5.2",
+          "unit": "mEq/L",
+          "referenceRange": "3.5-5.0",
+          "date": "2026-09-20",
+          "abnormal": true,
+          "trend": "up"
+        }
+      ],
+      "recentNotes": [
+        {
+          "date": "2026-09-22",
+          "type": "Office Visit",
+          "provider": "Dr. Michael Torres",
+          "summary": "Complex patient with multiple comorbidities. BP elevated today at 158/92. Recent echocardiogram shows EF 35-40%, consistent with systolic heart failure. Discussed diuretic adjustment and need for closer BP control. Referred to cardiology for possible advanced therapies. Addressed medication compliance."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "lab_critical",
+          "severity": "high",
+          "message": "Potassium elevated at 5.2 - monitor for hyperkalemia",
+          "date": "2026-09-20"
+        },
+        {
+          "type": "medication_interaction",
+          "severity": "high",
+          "message": "ACE inhibitor + Potassium sparing diuretic: monitor K+ levels",
+          "date": "2026-09-20"
+        },
+        {
+          "type": "screening_overdue",
+          "severity": "medium",
+          "message": "Diabetic eye exam - last done 18 months ago",
+          "date": "2026-09-26"
+        }
+      ]
+    },
+    {
+      "mrn": "P002003",
+      "name": "Jessica Thompson",
+      "age": 24,
+      "gender": "F",
+      "problems": [
+        {
+          "icd10": "S83.002",
+          "diagnosis": "Anterior dislocation of right tibia",
+          "status": "active",
+          "onsetDate": "2026-09-15",
+          "lastUpdated": "2026-09-24"
+        },
+        {
+          "icd10": "M99.00",
+          "diagnosis": "Misalignment of vertebral subluxation complex",
+          "status": "resolved",
+          "onsetDate": "2024-03-10",
+          "resolvedDate": "2024-06-30"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Ibuprofen",
+          "dose": "400",
+          "unit": "mg",
+          "frequency": "every 6 hours as needed",
+          "route": "oral",
+          "indication": "Pain management",
+          "startDate": "2026-09-15",
+          "status": "active"
+        }
+      ],
+      "allergies": [],
+      "vitals": [
+        {
+          "date": "2026-09-24",
+          "bloodPressure": "112/68",
+          "heartRate": "58",
+          "temperature": "98.6",
+          "weight": "135",
+          "height": "67",
+          "bmi": "21.1"
+        }
+      ],
+      "recentLabs": [
+        {
+          "testName": "CBC - WBC",
+          "value": "6.8",
+          "unit": "K/uL",
+          "referenceRange": "4.5-11.0",
+          "date": "2026-09-24",
+          "abnormal": false
+        },
+        {
+          "testName": "X-ray Knee",
+          "value": "Anterior tibial dislocation with soft tissue injury",
+          "unit": "imaging",
+          "referenceRange": "Normal",
+          "date": "2026-09-16",
+          "abnormal": true
+        }
+      ],
+      "recentNotes": [
+        {
+          "date": "2026-09-24",
+          "type": "Orthopedic Follow-up",
+          "provider": "Dr. Angela Jackson",
+          "summary": "Post-injury follow-up from knee dislocation. Patient doing well with conservative management. Swelling improving. Started physical therapy. No signs of compartment syndrome or vascular compromise. Plan for outpatient PT 3x/week for 6 weeks."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "medication_reminder",
+          "severity": "low",
+          "message": "Monitor NSAID use - limit to 2-3 weeks",
+          "date": "2026-09-26"
+        }
+      ]
+    },
+    {
+      "mrn": "P002004",
+      "name": "Linda Martinez",
+      "age": 45,
+      "gender": "F",
+      "problems": [
+        {
+          "icd10": "E06.3",
+          "diagnosis": "Autoimmune thyroiditis",
+          "status": "active",
+          "onsetDate": "2019-11-05",
+          "lastUpdated": "2026-09-20"
+        },
+        {
+          "icd10": "E03.9",
+          "diagnosis": "Hypothyroidism, unspecified",
+          "status": "active",
+          "onsetDate": "2019-11-10",
+          "lastUpdated": "2026-09-20"
+        },
+        {
+          "icd10": "M79.7",
+          "diagnosis": "Fibromyalgia",
+          "status": "active",
+          "onsetDate": "2015-08-15",
+          "lastUpdated": "2026-09-15"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Levothyroxine",
+          "dose": "75",
+          "unit": "mcg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Hypothyroidism",
+          "startDate": "2019-11-15",
+          "status": "active"
+        },
+        {
+          "drugName": "Gabapentin",
+          "dose": "300",
+          "unit": "mg",
+          "frequency": "three times daily",
+          "route": "oral",
+          "indication": "Fibromyalgia",
+          "startDate": "2020-02-01",
+          "status": "active"
+        }
+      ],
+      "allergies": [],
+      "vitals": [
+        {
+          "date": "2026-09-23",
+          "bloodPressure": "124/80",
+          "heartRate": "66",
+          "temperature": "98.5",
+          "weight": "145",
+          "height": "64",
+          "bmi": "24.9"
+        }
+      ],
+      "recentLabs": [
+        {
+          "testName": "TSH",
+          "value": "2.1",
+          "unit": "mIU/L",
+          "referenceRange": "0.4-4.0",
+          "date": "2026-09-18",
+          "abnormal": false
+        },
+        {
+          "testName": "Free T4",
+          "value": "1.2",
+          "unit": "ng/dL",
+          "referenceRange": "0.8-1.8",
+          "date": "2026-09-18",
+          "abnormal": false
+        }
+      ],
+      "recentNotes": [
+        {
+          "date": "2026-09-23",
+          "type": "Office Visit",
+          "provider": "Dr. Kevin Patel",
+          "summary": "Follow-up for hypothyroidism and fibromyalgia. Thyroid function tests stable on current levothyroxine dose. Fibromyalgia symptoms well-controlled on gabapentin. Patient reports improved energy and reduced pain. Continue current management."
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "mrn": "P002005",
+      "name": "Sarah Johnson",
+      "age": 32,
+      "gender": "F",
+      "problems": [
+        {
+          "icd10": "Z33.1",
+          "diagnosis": "Pregnancy, less than 20 weeks gestation",
+          "status": "active",
+          "onsetDate": "2026-06-15",
+          "lastUpdated": "2026-09-22"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Prenatal Vitamin",
+          "dose": "1",
+          "unit": "tablet",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Prenatal supplementation",
+          "startDate": "2026-06-15",
+          "status": "active"
+        },
+        {
+          "drugName": "Folic Acid",
+          "dose": "800",
+          "unit": "mcg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Neural tube defect prevention",
+          "startDate": "2026-06-15",
+          "status": "active"
+        },
+        {
+          "drugName": "Iron Supplement",
+          "dose": "325",
+          "unit": "mg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Pregnancy anemia prevention",
+          "startDate": "2026-09-01",
+          "status": "active"
+        }
+      ],
+      "allergies": [],
+      "vitals": [
+        {
+          "date": "2026-09-22",
+          "bloodPressure": "116/72",
+          "heartRate": "76",
+          "temperature": "98.4",
+          "weight": "152",
+          "height": "65",
+          "bmi": "25.3"
+        }
+      ],
+      "recentLabs": [
+        {
+          "testName": "Hemoglobin",
+          "value": "12.1",
+          "unit": "g/dL",
+          "referenceRange": "12.0-16.0",
+          "date": "2026-09-15",
+          "abnormal": false
+        },
+        {
+          "testName": "Glucose - Fasting",
+          "value": "88",
+          "unit": "mg/dL",
+          "referenceRange": "70-100",
+          "date": "2026-09-15",
+          "abnormal": false
+        },
+        {
+          "testName": "Ultrasound - 12 week",
+          "value": "Intrauterine pregnancy, normal growth",
+          "unit": "imaging",
+          "referenceRange": "Normal",
+          "date": "2026-09-10",
+          "abnormal": false
+        }
+      ],
+      "recentNotes": [
+        {
+          "date": "2026-09-22",
+          "type": "OB/GYN Prenatal Visit",
+          "provider": "Dr. Rebecca Wilson",
+          "summary": "12-week OB visit. Pregnancy progressing normally. Ultrasound shows appropriate fetal development. Vital signs stable. Patient reports nausea improving. Discussed prenatal testing options and scheduled anatomy ultrasound for 20 weeks. Provided educational materials."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "screening_recommended",
+          "severity": "medium",
+          "message": "2nd trimester screening due (weeks 15-22)",
+          "date": "2026-09-26"
+        }
+      ]
+    },
+    {
+      "mrn": "P002006",
+      "name": "David Chen",
+      "age": 38,
+      "gender": "M",
+      "problems": [
+        {
+          "icd10": "F32.1",
+          "diagnosis": "Major depressive disorder, single episode, moderate",
+          "status": "active",
+          "onsetDate": "2026-03-01",
+          "lastUpdated": "2026-09-20"
+        },
+        {
+          "icd10": "F41.1",
+          "diagnosis": "Generalized anxiety disorder",
+          "status": "active",
+          "onsetDate": "2023-06-15",
+          "lastUpdated": "2026-09-15"
+        },
+        {
+          "icd10": "G47.30",
+          "diagnosis": "Insomnia, unspecified",
+          "status": "active",
+          "onsetDate": "2026-03-05",
+          "lastUpdated": "2026-09-20"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Sertraline",
+          "dose": "100",
+          "unit": "mg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Depression, anxiety",
+          "startDate": "2026-03-15",
+          "status": "active"
+        },
+        {
+          "drugName": "Hydroxyzine",
+          "dose": "25",
+          "unit": "mg",
+          "frequency": "at bedtime as needed",
+          "route": "oral",
+          "indication": "Anxiety, insomnia",
+          "startDate": "2026-03-20",
+          "status": "active"
+        }
+      ],
+      "allergies": [],
+      "vitals": [
+        {
+          "date": "2026-09-23",
+          "bloodPressure": "128/82",
+          "heartRate": "74",
+          "temperature": "98.5",
+          "weight": "185",
+          "height": "72",
+          "bmi": "25.1"
+        }
+      ],
+      "recentLabs": [
+        {
+          "testName": "CBC",
+          "value": "All values normal",
+          "unit": "various",
+          "referenceRange": "Normal range",
+          "date": "2026-09-15",
+          "abnormal": false
+        }
+      ],
+      "recentNotes": [
+        {
+          "date": "2026-09-23",
+          "type": "Psychiatry Follow-up",
+          "provider": "Dr. James Lee",
+          "summary": "Follow-up for depression and anxiety. Patient reports improvement in mood and anxiety symptoms since starting sertraline. Sleep quality improving. Still some residual anxiety. Discussed cognitive behavioral therapy referral. Encouraged continued exercise and sleep hygiene. Plan to continue current medications."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "referral_pending",
+          "severity": "medium",
+          "message": "Cognitive behavioral therapy referral pending",
+          "date": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "mrn": "P002007",
+      "name": "Margaret O'Brien",
+      "age": 62,
+      "gender": "F",
+      "problems": [
+        {
+          "icd10": "C34.90",
+          "diagnosis": "Malignant neoplasm of unspecified part of unspecified lung",
+          "status": "active",
+          "onsetDate": "2025-11-01",
+          "lastUpdated": "2026-09-20"
+        },
+        {
+          "icd10": "Z51.11",
+          "diagnosis": "Encounter for antineoplastic chemotherapy",
+          "status": "active",
+          "onsetDate": "2025-12-01",
+          "lastUpdated": "2026-09-15"
+        },
+        {
+          "icd10": "D64.9",
+          "diagnosis": "Anemia, unspecified",
+          "status": "active",
+          "onsetDate": "2026-02-01",
+          "lastUpdated": "2026-09-20"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Carboplatin",
+          "dose": "400",
+          "unit": "mg",
+          "frequency": "IV every 3 weeks",
+          "route": "intravenous",
+          "indication": "Lung cancer chemotherapy",
+          "startDate": "2025-12-15",
+          "status": "active"
+        },
+        {
+          "drugName": "Pemetrexed",
+          "dose": "500",
+          "unit": "mg/m2",
+          "frequency": "IV every 3 weeks",
+          "route": "intravenous",
+          "indication": "Lung cancer chemotherapy",
+          "startDate": "2025-12-15",
+          "status": "active"
+        },
+        {
+          "drugName": "Ondansetron",
+          "dose": "8",
+          "unit": "mg",
+          "frequency": "three times daily as needed",
+          "route": "oral",
+          "indication": "Chemotherapy-induced nausea",
+          "startDate": "2025-12-15",
+          "status": "active"
+        },
+        {
+          "drugName": "Filgrastim",
+          "dose": "300",
+          "unit": "mcg",
+          "frequency": "once daily subcutaneous for 5-7 days post-chemo",
+          "route": "subcutaneous",
+          "indication": "Chemotherapy neutropenia prevention",
+          "startDate": "2025-12-20",
+          "status": "active"
+        }
+      ],
+      "allergies": [
+        {
+          "allergen": "Taxane chemotherapy agents",
+          "reactionType": "hypersensitivity reaction",
+          "severity": "major",
+          "recordedDate": "2026-01-15"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "2026-09-20",
+          "bloodPressure": "132/86",
+          "heartRate": "82",
+          "temperature": "98.9",
+          "weight": "128",
+          "height": "63",
+          "bmi": "22.7"
+        }
+      ],
+      "recentLabs": [
+        {
+          "testName": "Hemoglobin",
+          "value": "10.2",
+          "unit": "g/dL",
+          "referenceRange": "12.0-16.0",
+          "date": "2026-09-18",
+          "abnormal": true,
+          "trend": "down"
+        },
+        {
+          "testName": "WBC",
+          "value": "3.8",
+          "unit": "K/uL",
+          "referenceRange": "4.5-11.0",
+          "date": "2026-09-18",
+          "abnormal": true,
+          "trend": "stable"
+        },
+        {
+          "testName": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "referenceRange": "0.7-1.3",
+          "date": "2026-09-18",
+          "abnormal": false
+        }
+      ],
+      "recentNotes": [
+        {
+          "date": "2026-09-20",
+          "type": "Oncology Visit",
+          "provider": "Dr. Angela Jackson",
+          "summary": "Cycle 7 of chemotherapy. Patient tolerating well overall. Some anemia noted (Hgb 10.2), on supportive care. WBC recovery appropriate with filgrastim. CT chest shows good response to therapy with 30% reduction in tumor size. Discuss clinical trial options and palliative care referral."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "lab_abnormal",
+          "severity": "medium",
+          "message": "Hemoglobin 10.2 - mild anemia, monitor closely",
+          "date": "2026-09-18"
+        },
+        {
+          "type": "medication_alert",
+          "severity": "high",
+          "message": "AVOID: Taxane chemotherapy - documented hypersensitivity",
+          "date": "2026-01-15"
+        }
+      ]
+    },
+    {
+      "mrn": "P002008",
+      "name": "Thomas Anderson",
+      "age": 55,
+      "gender": "M",
+      "problems": [
+        {
+          "icd10": "M54.5",
+          "diagnosis": "Low back pain",
+          "status": "active",
+          "onsetDate": "2010-06-15",
+          "lastUpdated": "2026-09-15"
+        },
+        {
+          "icd10": "M19.90",
+          "diagnosis": "Unspecified osteoarthritis, unspecified site",
+          "status": "active",
+          "onsetDate": "2015-03-20",
+          "lastUpdated": "2026-09-10"
+        },
+        {
+          "icd10": "F32.9",
+          "diagnosis": "Major depressive disorder, single episode, unspecified",
+          "status": "active",
+          "onsetDate": "2018-09-01",
+          "lastUpdated": "2026-09-20"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Methadone",
+          "dose": "60",
+          "unit": "mg",
+          "frequency": "divided into 2-3 doses",
+          "route": "oral",
+          "indication": "Chronic pain management",
+          "startDate": "2016-02-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Amitriptyline",
+          "dose": "75",
+          "unit": "mg",
+          "frequency": "at bedtime",
+          "route": "oral",
+          "indication": "Pain, depression",
+          "startDate": "2018-10-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Muscle relaxant",
+          "dose": "500",
+          "unit": "mg",
+          "frequency": "three times daily",
+          "route": "oral",
+          "indication": "Muscle spasm",
+          "startDate": "2015-04-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Naltrexone",
+          "dose": "4.5",
+          "unit": "mg",
+          "frequency": "once daily at bedtime",
+          "route": "oral",
+          "indication": "Opioid antagonist for pain control",
+          "startDate": "2020-06-01",
+          "status": "active"
+        }
+      ],
+      "allergies": [
+        {
+          "allergen": "NSAIDs",
+          "reactionType": "GI upset",
+          "severity": "mild",
+          "recordedDate": "2012-05-10"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "2026-09-21",
+          "bloodPressure": "138/88",
+          "heartRate": "70",
+          "temperature": "98.7",
+          "weight": "210",
+          "height": "71",
+          "bmi": "29.3"
+        }
+      ],
+      "recentLabs": [
+        {
+          "testName": "Urine Drug Screen",
+          "value": "Methadone and expected metabolites present",
+          "unit": "qualitative",
+          "referenceRange": "Negative",
+          "date": "2026-09-15",
+          "abnormal": false
+        },
+        {
+          "testName": "Liver Function Panel",
+          "value": "All values normal",
+          "unit": "various",
+          "referenceRange": "Normal",
+          "date": "2026-09-15",
+          "abnormal": false
+        }
+      ],
+      "recentNotes": [
+        {
+          "date": "2026-09-21",
+          "type": "Pain Management Follow-up",
+          "provider": "Dr. Kevin Patel",
+          "summary": "Long-standing chronic pain patient stable on methadone. Pain controlled well, functioning at baseline. Urine drug screen appropriate. Continued participation in pain management program and PT. Monitored for depression symptoms. Plan to continue current regimen."
+        }
+      ],
+      "alerts": [
+        {
+          "type": "controlled_substance",
+          "severity": "medium",
+          "message": "Patient on methadone - controlled substance monitoring required",
+          "date": "2026-09-21"
+        }
+      ]
+    },
+    {
+      "mrn": "P002009",
+      "name": "Sophie Williams",
+      "age": 7,
+      "gender": "F",
+      "problems": [
+        {
+          "icd10": "J30.9",
+          "diagnosis": "Allergic rhinitis, unspecified",
+          "status": "active",
+          "onsetDate": "2023-04-15",
+          "lastUpdated": "2026-09-20"
+        },
+        {
+          "icd10": "H66.003",
+          "diagnosis": "Acute suppurative otitis media with spontaneous rupture of ear drum, bilateral",
+          "status": "resolved",
+          "onsetDate": "2026-08-10",
+          "resolvedDate": "2026-09-05"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Cetirizine",
+          "dose": "5",
+          "unit": "mg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Allergic rhinitis",
+          "startDate": "2023-04-20",
+          "status": "active"
+        }
+      ],
+      "allergies": [],
+      "vitals": [
+        {
+          "date": "2026-09-24",
+          "bloodPressure": "104/68",
+          "heartRate": "92",
+          "temperature": "98.5",
+          "weight": "52",
+          "height": "48",
+          "bmi": "14.7"
+        }
+      ],
+      "recentLabs": [],
+      "recentNotes": [
+        {
+          "date": "2026-09-24",
+          "type": "Pediatric Visit",
+          "provider": "Dr. Rebecca Wilson",
+          "summary": "7-year-old well-child visit. Healthy and active. Allergic rhinitis controlled on cetirizine. Recent otitis media resolved. Vaccines up to date. Development and growth normal. Discussed school readiness."
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "mrn": "P002010",
+      "name": "Marcus Davis",
+      "age": 41,
+      "gender": "M",
+      "problems": [
+        {
+          "icd10": "B20.9",
+          "diagnosis": "HIV disease, unspecified",
+          "status": "active",
+          "onsetDate": "2012-04-10",
+          "lastUpdated": "2026-09-20"
+        },
+        {
+          "icd10": "Z87.891",
+          "diagnosis": "Personal history of nicotine dependence",
+          "status": "active",
+          "onsetDate": "2000-01-01",
+          "lastUpdated": "2026-09-15"
+        }
+      ],
+      "medications": [
+        {
+          "drugName": "Bictegravir/Tenofovir/Emtricitabine",
+          "dose": "50/25/200",
+          "unit": "mg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "HIV treatment - antiretroviral",
+          "startDate": "2020-11-01",
+          "status": "active"
+        },
+        {
+          "drugName": "Cobicistat/Ritonavir booster",
+          "dose": "150/100",
+          "unit": "mg",
+          "frequency": "once daily",
+          "route": "oral",
+          "indication": "Protease inhibitor booster",
+          "startDate": "2020-11-01",
+          "status": "active"
+        }
+      ],
+      "allergies": [],
+      "vitals": [
+        {
+          "date": "2026-09-22",
+          "bloodPressure": "120/76",
+          "heartRate": "68",
+          "temperature": "98.4",
+          "weight": "175",
+          "height": "70",
+          "bmi": "25.1"
+        }
+      ],
+      "recentLabs": [
+        {
+          "testName": "CD4 Count",
+          "value": "620",
+          "unit": "cells/mm3",
+          "referenceRange": ">500",
+          "date": "2026-09-15",
+          "abnormal": false
+        },
+        {
+          "testName": "HIV RNA (Viral Load)",
+          "value": "<20",
+          "unit": "copies/mL",
+          "referenceRange": "Undetectable",
+          "date": "2026-09-15",
+          "abnormal": false
+        }
+      ],
+      "recentNotes": [
+        {
+          "date": "2026-09-22",
+          "type": "HIV Specialty Clinic Visit",
+          "provider": "Dr. Sarah Chen",
+          "summary": "Long-term non-progressor on stable antiretroviral therapy. CD4 count 620 and viral load undetectable. Excellent medication adherence. Health status excellent. Discussed smoking cessation programs. Hepatitis and TB screening negative. Plan continue current regimen with quarterly follow-ups."
+        }
+      ],
+      "alerts": []
     }
   ]
 }
