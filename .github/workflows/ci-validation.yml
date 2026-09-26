@@ -1,0 +1,223 @@
+name: CI/CD Validation Pipeline
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  validate-platforms:
+    name: Validate All Healthcare Platforms
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyyaml jsonschema
+
+    - name: Run comprehensive platform validation
+      run: |
+        chmod +x tests/validate-all-platforms.sh
+        ./tests/validate-all-platforms.sh
+
+    - name: Run clinical validation
+      run: |
+        chmod +x tests/clinical-validation.sh
+        ./tests/clinical-validation.sh
+
+    - name: Check for PII/credentials
+      run: |
+        echo "Scanning for sensitive data..."
+        ! find . -type f \( -name "*.md" -o -name "*.json" -o -name "*.py" \) \
+          -exec grep -l -iE "(password|api.?key|secret|credential|SSN|MRN|patient.?id)" {} \; \
+          2>/dev/null | grep -v ".git" || exit 1
+
+    - name: Validate documentation structure
+      run: |
+        echo "Validating documentation structure..."
+        for platform in Banner-Health-Clinical-Assistant Carta-Healthcare-Data-Processing \
+                       Commure-Documentation-Automation Elation-Health-Chart-Review \
+                       Qualified-Health-Patient-Screening; do
+          echo "Checking $platform..."
+          [ -f "$platform/plan.md" ] || exit 1
+          [ -f "$platform/CLAUDE.md" ] || exit 1
+          [ -d "$platform/architecture" ] || exit 1
+          [ -d "$platform/implementation" ] || exit 1
+          [ -d "$platform/monitoring" ] || exit 1
+        done
+
+    - name: Validate YAML configurations
+      run: |
+        echo "Validating YAML configurations..."
+        python3 << 'EOF'
+        import yaml
+        import json
+        import glob
+
+        # Validate settings.json files
+        for settings_file in glob.glob('*/.claude/settings.json'):
+            try:
+                with open(settings_file) as f:
+                    json.load(f)
+                print(f"✓ Valid JSON: {settings_file}")
+            except Exception as e:
+                print(f"✗ Invalid JSON: {settings_file}: {e}")
+                exit(1)
+        EOF
+
+    - name: Run compliance checks
+      run: |
+        echo "Running HIPAA/Compliance checks..."
+        python3 << 'EOF'
+        import glob
+        import os
+
+        required_sections = {
+          'plan.md': ['HIPAA', 'compliance', 'Privacy', 'Security', 'Risk'],
+          'monitoring/observability-strategy.md': ['Compliance', 'Audit', 'SLA', 'Alert'],
+          'architecture/system-architecture.md': ['Security', 'Encryption', 'Access Control']
+        }
+
+        platforms = glob.glob('[A-Q]*-Health*')
+
+        for platform in platforms:
+            print(f"\nChecking {platform}...")
+            for file_path, sections in required_sections.items():
+                full_path = os.path.join(platform, file_path)
+                if os.path.exists(full_path):
+                    with open(full_path) as f:
+                        content = f.read().lower()
+                    found = sum(1 for section in sections if section.lower() in content)
+                    print(f"  {file_path}: {found}/{len(sections)} compliance sections")
+                    if found < len(sections) / 2:
+                        print(f"    ⚠ Warning: Missing compliance coverage")
+        EOF
+
+  test-git-hooks:
+    name: Verify Git Hooks
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Verify hook files exist
+      run: |
+        echo "Checking pre-commit hooks..."
+        hooks=(
+          ".claude/hooks/pre-commit-healthcare.sh"
+          "Banner-Health-Clinical-Assistant/.claude/hooks/pre-commit-banner.sh"
+          "Carta-Healthcare-Data-Processing/.claude/hooks/pre-commit-carta.sh"
+          "Commure-Documentation-Automation/.claude/hooks/pre-commit-commure.sh"
+          "Elation-Health-Chart-Review/.claude/hooks/pre-commit-elation.sh"
+          "Qualified-Health-Patient-Screening/.claude/hooks/pre-commit-qualified.sh"
+        )
+
+        for hook in "${hooks[@]}"; do
+          if [ -f "$hook" ]; then
+            chmod +x "$hook"
+            echo "✓ Found and executable: $hook"
+          else
+            echo "✗ Missing: $hook"
+            exit 1
+          fi
+        done
+
+    - name: Verify hook syntax
+      run: |
+        echo "Checking hook syntax..."
+        for hook in $(find . -path "*/.claude/hooks/*.sh"); do
+          if bash -n "$hook" 2>&1; then
+            echo "✓ Valid syntax: $hook"
+          else
+            echo "✗ Syntax error: $hook"
+            exit 1
+          fi
+        done
+
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Check for dangerous patterns
+      run: |
+        echo "Scanning for dangerous patterns..."
+        ! grep -r -E "(rm -rf|chmod 777|eval|exec\()" --include="*.sh" --include="*.py" . || exit 1
+        echo "✓ No dangerous patterns found"
+
+    - name: Verify encryption mentions
+      run: |
+        echo "Verifying encryption/security measures..."
+        found=0
+        for file in $(find . -name "*.md" -type f); do
+          if grep -q -i "encryption\|TLS\|HIPAA\|audit.*log" "$file"; then
+            found=$((found + 1))
+          fi
+        done
+        echo "✓ Found $found files with security/encryption mentions"
+        [ $found -gt 10 ] || exit 1
+
+  merge-to-main:
+    name: Check Merge Eligibility
+    needs: [validate-platforms, test-git-hooks, security-scan]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: All validations passed - Ready for merge to main
+      run: |
+        echo "✅ All CI/CD validations PASSED"
+        echo "Branch is eligible for merge to main"
+        echo ""
+        echo "To merge to main:"
+        echo "  git checkout main"
+        echo "  git merge dev"
+        echo "  git push origin main"
+
+    - name: Report CI Status
+      run: |
+        echo "CI Status Report:"
+        echo "- Platform validation: ✓ PASSED"
+        echo "- Clinical checks: ✓ PASSED"
+        echo "- Security scan: ✓ PASSED"
+        echo "- Git hooks: ✓ VERIFIED"
+        echo ""
+        echo "Merge to main is APPROVED"
+
+  failure-notification:
+    name: Notify on Failure
+    needs: [validate-platforms, test-git-hooks, security-scan]
+    runs-on: ubuntu-latest
+    if: failure()
+
+    steps:
+    - name: Report failure
+      run: |
+        echo "❌ CI/CD VALIDATION FAILED"
+        echo ""
+        echo "Fix the following before merging:"
+        echo "1. Review platform validation errors"
+        echo "2. Fix clinical compliance issues"
+        echo "3. Address security scan findings"
+        echo ""
+        echo "Cannot merge to main until all checks pass"
+        exit 1
