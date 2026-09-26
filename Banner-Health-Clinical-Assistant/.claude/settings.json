@@ -1,0 +1,8 @@
+{
+  "projectName": "Banner Health - Physician Documentation Automation",
+  "focus": "Reduce physician burnout via AI-assisted documentation",
+  "keyMetric": "20+ minutes saved per physician per day",
+  "successCriteria": {"accuracy": "95%+", "adoption": "85%+"},
+  "skills": {"doc-review": {"enabled": true}},
+  "agents": {"llm-documentation-validator": {"enabled": true}}
+}

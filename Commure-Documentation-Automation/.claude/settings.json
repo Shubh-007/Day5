@@ -1,0 +1,54 @@
+{
+  "projectName": "Commure - Clinical Documentation Automation",
+  "description": "Fully automated clinical documentation from voice encounters",
+  "platform": "Commure",
+  "focus": "ASR + Note Generation + Billing Compliance",
+  "keyMetric": "90%+ automation rate, $5-8 saved per encounter",
+  "phase": "Phase 0 MVP",
+  "model": "claude-opus-5-5",
+  "skills": {
+    "asr-review": {
+      "enabled": true,
+      "description": "Validate ASR & note generation quality"
+    },
+    "compliance-audit": {
+      "enabled": true,
+      "description": "Verify billing & medical necessity compliance"
+    }
+  },
+  "agents": {
+    "documentation-automation-specialist": {
+      "enabled": true,
+      "focus": "End-to-end automation validation"
+    }
+  },
+  "mcp": {
+    "billing-optimization-server": {
+      "enabled": true,
+      "focus": "Revenue cycle, compliance, fraud prevention"
+    }
+  },
+  "hooks": {
+    "pre-commit-commure.sh": {
+      "enabled": true,
+      "checks": [
+        "asr-changes",
+        "billing-code-changes",
+        "note-generation-logic",
+        "automation-metrics"
+      ]
+    }
+  },
+  "successCriteria": {
+    "automation_rate": "90%+",
+    "accuracy": "95%+",
+    "compliance": "99.5%+",
+    "latency_seconds": "<15",
+    "value_per_encounter": "$5-8"
+  },
+  "teamPermissions": {
+    "clinical-lead": ["doc-review", "asr-validate"],
+    "compliance-officer": ["billing-check", "compliance-audit"],
+    "devops": ["scaling", "monitoring"]
+  }
+}

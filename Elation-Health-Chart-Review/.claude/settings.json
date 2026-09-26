@@ -1,0 +1,8 @@
+{
+  "projectName": "Elation Health - Chart Review Assistant",
+  "focus": "61% faster chart review for primary care",
+  "keyMetric": "25 minutes → 10 minutes per patient",
+  "successCriteria": {"timeSavings": "61%", "accuracy": "98%+"},
+  "skills": {"summary-validate": {"enabled": true}},
+  "agents": {"chart-intelligence-engine": {"enabled": true}}
+}

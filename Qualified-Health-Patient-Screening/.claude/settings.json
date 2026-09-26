@@ -1,0 +1,8 @@
+{
+  "projectName": "Qualified Health - Patient Screening",
+  "focus": "Identify patients for life-saving interventions",
+  "keyMetric": "90%+ rule accuracy, <500ms patient lookup",
+  "successCriteria": {"accuracy": "90%+", "precision": ">90%"},
+  "skills": {"screen-validate": {"enabled": true}},
+  "agents": {"screening-rules-validator": {"enabled": true}}
+}

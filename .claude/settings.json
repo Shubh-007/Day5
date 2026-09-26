@@ -1,0 +1,221 @@
+{
+  "projectName": "Healthcare Platform Portfolio",
+  "description": "5 healthcare AI platforms: Banner Health, Carta Healthcare, Commure, Elation Health, Qualified Health",
+  "platforms": [
+    {
+      "name": "Banner Health",
+      "path": "Banner-Health-Clinical-Assistant",
+      "focus": "Physician Documentation Automation",
+      "status": "completed"
+    },
+    {
+      "name": "Carta Healthcare",
+      "path": "Carta-Healthcare-Data-Processing",
+      "focus": "Clinical Data Extraction & Structuring",
+      "status": "completed"
+    },
+    {
+      "name": "Commure",
+      "path": "Commure-Documentation-Automation",
+      "focus": "Clinical Documentation Automation at Scale",
+      "status": "completed"
+    },
+    {
+      "name": "Elation Health",
+      "path": "Elation-Health-Chart-Review",
+      "focus": "Chart Review & Documentation Assistant",
+      "status": "completed"
+    },
+    {
+      "name": "Qualified Health",
+      "path": "Qualified-Health-Patient-Screening",
+      "focus": "Patient Screening for Interventions",
+      "status": "completed"
+    }
+  ],
+  "model": "claude-opus-5-5",
+  "fastModel": "claude-opus-5-5",
+  "defaultAgentType": "claude",
+  "permissions": {
+    "allowedTools": [
+      "Read",
+      "Write",
+      "Edit",
+      "Bash",
+      "Agent",
+      "Skill"
+    ]
+  },
+  "skills": {
+    "clinical-review": {
+      "enabled": true,
+      "description": "Clinical documentation quality assurance",
+      "autoTrigger": true,
+      "triggerPatterns": ["clinical review", "review.*clinical", "accuracy check"]
+    },
+    "compliance-audit": {
+      "enabled": true,
+      "description": "HIPAA & healthcare regulatory verification",
+      "autoTrigger": true,
+      "triggerPatterns": ["compliance", "audit", "HIPAA", "regulatory"]
+    },
+    "ehr-integration-test": {
+      "enabled": true,
+      "description": "EHR connectivity & data exchange validation",
+      "autoTrigger": true,
+      "triggerPatterns": ["ehr", "integration", "epic", "cerner"]
+    }
+  },
+  "agents": {
+    "clinical-validator": {
+      "enabled": true,
+      "type": "specialized",
+      "model": "claude-sonnet-5",
+      "description": "Clinical accuracy and safety validation",
+      "permissions": ["read-clinical-data", "access-terminology"]
+    },
+    "compliance-officer": {
+      "enabled": true,
+      "type": "specialized",
+      "model": "claude-opus-5-5",
+      "description": "HIPAA & regulatory compliance enforcement",
+      "permissions": ["audit-access", "compliance-review"]
+    }
+  },
+  "mcp": {
+    "ehr-data-server": {
+      "enabled": false,
+      "description": "EHR data access for terminology and guidelines",
+      "requires_configuration": true,
+      "databases": [
+        "terminology.db",
+        "drug-interactions.db",
+        "clinical-guidelines.db"
+      ]
+    }
+  },
+  "hooks": {
+    "pre-commit": {
+      "enabled": true,
+      "script": ".claude/hooks/pre-commit-healthcare.sh",
+      "checks": [
+        "pii-detection",
+        "hipaa-compliance",
+        "required-files",
+        "security-patterns",
+        "commit-message-format"
+      ]
+    },
+    "pre-push": {
+      "enabled": true,
+      "script": ".claude/hooks/pre-push-compliance.sh",
+      "checks": [
+        "all-commits-signed",
+        "no-sensitive-data",
+        "compliance-review"
+      ]
+    }
+  },
+  "clinicalSettings": {
+    "compliance": {
+      "frameworks": ["HIPAA", "HITECH", "State-Laws"],
+      "audit_frequency": "quarterly",
+      "breach_risk_level": "high",
+      "require_audit_trail": true
+    },
+    "documentation": {
+      "required_sections": [
+        "plan.md",
+        "architecture/system-architecture.md",
+        "implementation/development-roadmap.md",
+        "monitoring/observability-strategy.md",
+        "README.md"
+      ],
+      "validation_level": "strict"
+    },
+    "security": {
+      "encryption": "AES-256",
+      "tls_version": "1.3",
+      "pii_detection": true,
+      "hipaa_compliance": true
+    }
+  },
+  "developmentSettings": {
+    "phases": {
+      "phase0": {
+        "name": "MVP",
+        "duration_weeks": 6,
+        "team_size": 3,
+        "status": "planning"
+      },
+      "phase1": {
+        "name": "Production Scaling",
+        "duration_weeks": 8,
+        "team_size": 6,
+        "status": "planning"
+      },
+      "phase2": {
+        "name": "Optimization & Compliance",
+        "duration_weeks": 6,
+        "team_size": 5,
+        "status": "planning"
+      }
+    },
+    "testing": {
+      "unit_test_coverage_target": 80,
+      "integration_test_required": true,
+      "clinical_validation_required": true,
+      "compliance_audit_required": true
+    },
+    "deployment": {
+      "environments": ["dev", "staging", "production"],
+      "canary_deployment": true,
+      "rollback_capability": true
+    }
+  },
+  "monitoring": {
+    "dashboards": {
+      "operational": true,
+      "clinical-safety": true,
+      "compliance": true,
+      "financial": true
+    },
+    "alerts": {
+      "critical_threshold": "p0",
+      "high_threshold": "p1",
+      "escalation_enabled": true
+    },
+    "metrics": {
+      "track_clinical_accuracy": true,
+      "track_compliance": true,
+      "track_performance": true,
+      "track_cost": true
+    }
+  },
+  "teamPermissions": {
+    "clinical-lead": {
+      "can_trigger": ["clinical-review", "compliance-audit"],
+      "can_access": ["clinical-validator", "compliance-officer"]
+    },
+    "compliance-officer": {
+      "can_trigger": ["compliance-audit"],
+      "can_access": ["compliance-officer"],
+      "read_only": true
+    },
+    "devops": {
+      "can_trigger": ["ehr-integration-test"],
+      "can_access": ["ehr-data-server"]
+    },
+    "developers": {
+      "can_read": ["all-documentation"],
+      "can_trigger": [],
+      "requires_review": true
+    }
+  },
+  "reminders": {
+    "enabled": true,
+    "compliance_review_frequency": "monthly",
+    "security_audit_frequency": "quarterly",
+    "clinical_validation_frequency": "ongoing"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "projectName": "Carta Healthcare - Clinical Data Extraction",
+  "focus": "66% faster processing of clinical records",
+  "keyMetric": "99% extraction accuracy, 10M+ records/year",
+  "successCriteria": {"accuracy": "99%+", "speed": "66% faster"},
+  "skills": {"entity-validate": {"enabled": true}},
+  "agents": {"nlp-quality-auditor": {"enabled": true}}
+}
