@@ -1,0 +1,94 @@
+{
+  "pluginEnabledStatus": {
+    "backlink": true,
+    "outline": true,
+    "graph": true,
+    "tag-pane": true,
+    "page-preview": true,
+    "daily-notes": true,
+    "templates": true,
+    "note-composer": true,
+    "command-palette": true,
+    "markdown-importer": true,
+    "obsidian-git": true,
+    "dataview": true,
+    "graph-analysis": true,
+    "smart-typography": false,
+    "slides": false,
+    "audio-recorder": false,
+    "obsidian-checklist-plugin": true,
+    "hover-editor": true,
+    "obsidian-kanban": true,
+    "quick-add": true,
+    "natural-language-dates": true
+  },
+  "readmeMode": true,
+  "readmeFile": "INDEX.md",
+  "showToc": true,
+  "showFileTree": true,
+  "showVault": true,
+  "vimMode": false,
+  "defaultViewMode": "preview",
+  "showFrontmatter": false,
+  "showLineNumbers": false,
+  "strictLineBreaks": true,
+  "obsidianCacheSize": 10,
+  "obsidianAutoSaveInterval": 10000,
+  "cssTheme": "Minimal",
+  "accentColor": "#0066cc",
+  "baseFontSize": 16,
+  "baseTheme": "dark",
+  "showRibbon": true,
+  "showStatus": true,
+  "showInlineTitle": true,
+  "showEmbedCues": true,
+  "showInlineFieldIcons": true,
+  "showUnsupportedFiles": false,
+  "showAttachmentPath": true,
+  "smartIndentList": true,
+  "useMarkdownLinks": true,
+  "newFileLocation": "root",
+  "newFileFolderPath": "vault",
+  "attachmentFolderPath": "assets/attachments",
+  "promptDelete": true,
+  "alwaysUpdateLinks": true,
+  "obsidianAutoLink": true,
+  "obsidianLinkUpdateBehavior": "prompt",
+  "obsidianMergeExistingLinks": false,
+  "obsidianShowLinkSuggestions": true,
+  "obsidianUnicodeNormalization": false,
+  "obsidianShowBreadcrumbs": true,
+  "obsidianSpellCheck": true,
+  "obsidianShowSpellCheckLanguages": ["en"],
+  "pdfExportPageSize": "A4",
+  "pdfExportMargins": {
+    "top": 20,
+    "right": 20,
+    "bottom": 20,
+    "left": 20
+  },
+  "graphSettings": {
+    "physics": {
+      "enabled": true,
+      "stabilization": {
+        "iterations": 200
+      },
+      "barnesHut": {
+        "gravitationalConstant": -26000,
+        "centralGravity": 0.005,
+        "springLength": 250,
+        "springConstant": 0.04
+      }
+    },
+    "interaction": {
+      "hover": true,
+      "navigationButtons": true,
+      "keyboard": true
+    }
+  },
+  "tagPaneSettings": {
+    "showTree": true,
+    "showSearch": true,
+    "showCount": true
+  }
+}

@@ -4,8 +4,12 @@ import json
 import os
 from datetime import datetime
 from typing import Optional
+from tools_api import router as tools_router
 
-app = FastAPI(title="Elation Health Chart Review API")
+app = FastAPI(
+    title="Elation Health Chart Review API",
+    description="AI-powered clinical summarization with RAG engine and sub-agent tools"
+)
 
 # Enable CORS for frontend
 app.add_middleware(
@@ -15,6 +19,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include tools API router
+app.include_router(tools_router)
 
 # Load sample patient data
 DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "sample_patients.json")
@@ -103,13 +110,23 @@ def calculate_days_since(date_str):
 def root():
     return {
         "service": "Elation Health Chart Review API",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "status": "running",
+        "features": [
+            "Clinical summarization",
+            "Pre-visit preparation",
+            "RAG-powered clinical knowledge retrieval",
+            "Sub-agent tools for AI automation",
+            "Alert management & safety validation"
+        ],
         "endpoints": {
-            "patients": "/api/patients",
+            "dashboard": "/api/dashboard",
             "patient_summary": "/api/patients/{mrn}/summary",
             "patient_details": "/api/patients/{mrn}",
-            "dashboard": "/api/dashboard",
+            "sub_agent_tools": "/api/tools",
+            "rag_retrieval": "/api/tools/retrieve/context",
+            "available_tools": "/api/tools/available",
+            "tool_definitions": "/api/tools/definitions"
         }
     }
 
