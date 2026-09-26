@@ -5,6 +5,9 @@ import '../styles/quickview.css'
 function QuickView({ mrn, onBack }) {
   const [summary, setSummary] = useState(null)
   const [details, setDetails] = useState(null)
+  const [ragData, setRagData] = useState(null)
+  const [drugInteractions, setDrugInteractions] = useState(null)
+  const [clinicalGuidelines, setClinicalGuidelines] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [reviewTime, setReviewTime] = useState(null)
@@ -24,23 +27,64 @@ function QuickView({ mrn, onBack }) {
   const fetchPatientData = async () => {
     try {
       setLoading(true)
-      const [summRes, detailRes] = await Promise.all([
+      const [summRes, detailRes, ragRes] = await Promise.all([
         fetch(`/api/patients/${mrn}/summary`),
-        fetch(`/api/patients/${mrn}`)
+        fetch(`/api/patients/${mrn}`),
+        fetch(`/api/tools/clinical-context/${mrn}?include=problems,medications,alerts`)
       ])
 
       if (!summRes.ok || !detailRes.ok) throw new Error('Failed to fetch patient data')
 
       const summData = await summRes.json()
       const detailData = await detailRes.json()
+      const ragData = ragRes.ok ? await ragRes.json() : null
 
       setSummary(summData)
       setDetails(detailData)
+      if (ragData) {
+        setRagData(ragData)
+        await fetchDrugInteractions(summData.currentMedications)
+        await fetchClinicalGuidelines(summData.activeConditions)
+      }
       setError(null)
     } catch (err) {
       setError(err.message)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const fetchDrugInteractions = async (medications) => {
+    try {
+      const drugNames = medications.map(m => m.split(' ')[0]) // Extract drug names
+      const res = await fetch('/api/tools/drug-interactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ medications: drugNames })
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setDrugInteractions(data)
+      }
+    } catch (err) {
+      console.error('Failed to fetch drug interactions:', err)
+    }
+  }
+
+  const fetchClinicalGuidelines = async (conditions) => {
+    try {
+      // Fetch guidelines for each condition
+      const guidelines = {}
+      for (const condition of conditions) {
+        const res = await fetch(`/api/tools/retrieve/context?query=${encodeURIComponent(condition + ' management')}&context_type=guideline`)
+        if (res.ok) {
+          const data = await res.json()
+          guidelines[condition] = data
+        }
+      }
+      setClinicalGuidelines(guidelines)
+    } catch (err) {
+      console.error('Failed to fetch clinical guidelines:', err)
     }
   }
 
@@ -160,6 +204,88 @@ function QuickView({ mrn, onBack }) {
                   </li>
                 ))}
               </ul>
+            </section>
+          )}
+
+          {/* RAG: Drug Safety Card */}
+          {drugInteractions && drugInteractions.total_interactions > 0 && (
+            <section className="card rag-card drug-safety">
+              <h3>🔬 Drug Safety Check (RAG)</h3>
+              <div className="rag-content">
+                <p className="rag-metric">
+                  <strong>{drugInteractions.total_interactions}</strong> interaction(s) detected
+                </p>
+                {drugInteractions.interactions && drugInteractions.interactions.length > 0 && (
+                  <ul>
+                    {drugInteractions.interactions.slice(0, 3).map((interaction, idx) => (
+                      <li key={idx} className={`interaction-${interaction.severity || 'moderate'}`}>
+                        <strong>{interaction.drug1}</strong> + <strong>{interaction.drug2}</strong>
+                        {interaction.severity && <span className="severity-badge">{interaction.severity}</span>}
+                        <p>{interaction.interaction_type}</p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <p className="rag-source">🤖 Powered by RAG Clinical Database</p>
+              </div>
+            </section>
+          )}
+
+          {/* RAG: Clinical Guidelines Card */}
+          {clinicalGuidelines && Object.keys(clinicalGuidelines).length > 0 && (
+            <section className="card rag-card clinical-guidelines">
+              <h3>📚 Clinical Guidelines (RAG)</h3>
+              <div className="rag-content">
+                {Object.entries(clinicalGuidelines).map(([condition, guidelines]) => (
+                  <div key={condition} className="guideline-item">
+                    <h4>{condition}</h4>
+                    {guidelines.results && guidelines.results.length > 0 && (
+                      <div className="guideline-summary">
+                        <p>{guidelines.results[0].content?.substring(0, 150)}...</p>
+                        {guidelines.results[0].relevance_score && (
+                          <p className="relevance">
+                            Relevance: <strong>{(guidelines.results[0].relevance_score * 100).toFixed(0)}%</strong>
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                <p className="rag-source">🤖 Powered by RAG Clinical Database</p>
+              </div>
+            </section>
+          )}
+
+          {/* RAG: Clinical Context Card */}
+          {ragData && ragData.retrieved_at && (
+            <section className="card rag-card clinical-context">
+              <h3>🧠 Clinical Context (RAG)</h3>
+              <div className="rag-content">
+                {ragData.problems && ragData.problems.length > 0 && (
+                  <div className="context-section">
+                    <h4>Problem List Summary</h4>
+                    <ul>
+                      {ragData.problems.slice(0, 3).map((p, idx) => (
+                        <li key={idx}>{p.diagnosis} - {p.status}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {ragData.recent_labs && ragData.recent_labs.length > 0 && (
+                  <div className="context-section">
+                    <h4>Recent Lab Trends</h4>
+                    <ul>
+                      {ragData.recent_labs.slice(0, 3).map((lab, idx) => (
+                        <li key={idx}>
+                          {lab.test_name}: {lab.value} {lab.unit}
+                          {lab.trend && <span className="trend-indicator">{lab.trend}</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                <p className="rag-source">🤖 Retrieved at {new Date(ragData.retrieved_at).toLocaleTimeString()}</p>
+              </div>
             </section>
           )}
 

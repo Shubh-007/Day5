@@ -223,6 +223,170 @@
   font-weight: 600;
 }
 
+/* RAG-Powered Cards */
+.rag-card {
+  border-top-color: #7c3aed;
+  background: linear-gradient(135deg, #f5f3ff 0%, #faf5ff 100%);
+  border-left: 4px solid #7c3aed;
+}
+
+.rag-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #7c3aed;
+}
+
+.rag-content {
+  margin-top: 1rem;
+}
+
+.rag-metric {
+  font-size: 1.1rem;
+  color: #6d28d9;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: var(--border-radius);
+  border-left: 3px solid #7c3aed;
+}
+
+.rag-source {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9d5ff;
+  font-size: 0.85rem;
+  color: #7c3aed;
+  font-weight: 500;
+}
+
+.drug-safety {
+  border-top-color: #dc2626;
+}
+
+.drug-safety h3 {
+  color: #dc2626;
+}
+
+.drug-safety .rag-metric {
+  background: #fef2f2;
+  color: #991b1b;
+  border-left-color: #dc2626;
+}
+
+.interaction-critical,
+.interaction-severe {
+  color: #dc2626;
+  font-weight: 600;
+  background: #fef2f2;
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  margin: 0.5rem 0;
+  border-left: 3px solid #dc2626;
+}
+
+.interaction-moderate {
+  color: #ea580c;
+  font-weight: 500;
+  background: #fffbeb;
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  margin: 0.5rem 0;
+  border-left: 3px solid #ea580c;
+}
+
+.severity-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.clinical-guidelines {
+  border-top-color: #2563eb;
+}
+
+.clinical-guidelines h3 {
+  color: #2563eb;
+}
+
+.guideline-item {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9d5ff;
+}
+
+.guideline-item h4 {
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.guideline-summary {
+  background: white;
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  border-left: 3px solid #2563eb;
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.relevance {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #2563eb;
+}
+
+.clinical-context {
+  border-top-color: #059669;
+}
+
+.clinical-context h3 {
+  color: #059669;
+}
+
+.context-section {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9d5ff;
+}
+
+.context-section h4 {
+  color: #065f46;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.context-section ul {
+  background: white;
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  border-left: 3px solid #059669;
+}
+
+.context-section li {
+  color: #374151;
+  padding: 0.4rem 0;
+  border-bottom: none;
+}
+
+.trend-indicator {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  background: #f0fdf4;
+  color: #059669;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
 .action-btn:hover {
   background: #059669;
   transform: translateY(-2px);
