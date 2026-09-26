@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import PatientCard from '../components/PatientCard'
 import AlertBanner from '../components/AlertBanner'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { apiFetch } from '../api/client'
 import '../styles/dashboard.css'
 
 function Dashboard({ onSelectPatient }) {
@@ -18,11 +19,9 @@ function Dashboard({ onSelectPatient }) {
     try {
       setLoading(true)
       const [dashRes, alertsRes] = await Promise.all([
-        fetch('/api/dashboard'),
-        fetch('/api/alerts')
+        apiFetch('/api/dashboard'),
+        apiFetch('/api/alerts')
       ])
-
-      if (!dashRes.ok || !alertsRes.ok) throw new Error('Failed to fetch data')
 
       const dashData = await dashRes.json()
       const alertsData = await alertsRes.json()

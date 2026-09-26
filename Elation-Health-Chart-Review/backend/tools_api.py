@@ -3,9 +3,12 @@ Elation Health - Tools API for Sub-Agents
 Provides endpoints for MCP tools used by sub-agents
 """
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from typing import List, Dict, Any
+from datetime import datetime
 from rag_engine import retrieve_context, retrieve_patient_context, rag_engine
+from auth import get_current_user, can_access_patient, CurrentUser
+from audit_log import log_access
 import json
 
 
@@ -20,7 +23,8 @@ router = APIRouter(prefix="/api/tools", tags=["Sub-Agent Tools"])
 def get_clinical_context(
     mrn: str,
     include: str = "all",  # comma-separated: problems,medications,labs,alerts,history
-    time_window: str = "6m"  # 1w, 1m, 6m, 1y, all
+    time_window: str = "6m",  # 1w, 1m, 6m, 1y, all
+    current_user: CurrentUser = Depends(get_current_user)
 ) -> Dict[str, Any]:
     """
     Tool: get_clinical_context
@@ -34,6 +38,28 @@ def get_clinical_context(
         raise HTTPException(status_code=404, detail="Patient not found")
 
     patient = PATIENTS_BY_MRN[mrn]
+
+    # RBAC check
+    if not can_access_patient(current_user, patient):
+        log_access(
+            user=current_user.username,
+            role=current_user.role,
+            action="GET /api/tools/clinical-context/{mrn}",
+            mrn=mrn,
+            ip="unknown",
+            result="denied",
+            detail="Patient not in scope"
+        )
+        raise HTTPException(status_code=404, detail="Patient not found")
+
+    log_access(
+        user=current_user.username,
+        role=current_user.role,
+        action="GET /api/tools/clinical-context/{mrn}",
+        mrn=mrn,
+        ip="unknown",
+        result="success"
+    )
     include_fields = [f.strip() for f in include.split(",")] if include != "all" else [
         "problems", "medications", "labs", "alerts", "history"
     ]
@@ -70,7 +96,8 @@ def get_clinical_context(
 @router.get("/condition-profile/{icd10}")
 def get_condition_profile(
     icd10: str,
-    include: str = "all"  # pathophysiology, complications, management, red_flags
+    include: str = "all",  # pathophysiology, complications, management, red_flags
+    current_user: CurrentUser = Depends(get_current_user)
 ) -> Dict[str, Any]:
     """
     Tool: get_condition_profile
@@ -144,7 +171,8 @@ def check_drug_interactions(
 def get_preventive_care_status(
     mrn: str,
     age: int = None,
-    gender: str = None
+    gender: str = None,
+    current_user: CurrentUser = Depends(get_current_user)
 ) -> Dict[str, Any]:
     """
     Tool: get_preventive_care_status
@@ -158,6 +186,19 @@ def get_preventive_care_status(
         raise HTTPException(status_code=404, detail="Patient not found")
 
     patient = PATIENTS_BY_MRN[mrn]
+
+    # RBAC check
+    if not can_access_patient(current_user, patient):
+        log_access(
+            user=current_user.username,
+            role=current_user.role,
+            action="GET /api/tools/preventive-care/{mrn}",
+            mrn=mrn,
+            ip="unknown",
+            result="denied",
+            detail="Patient not in scope"
+        )
+        raise HTTPException(status_code=404, detail="Patient not found")
     age = age or patient.get("age")
     gender = gender or patient.get("gender")
     conditions = [p.get("diagnosis") for p in patient.get("problems", [])]
@@ -399,6 +440,137 @@ def retrieve_clinical_context_tool(
     return retrieve_context(query, context_type)
 
 
+@router.post("/chat/rag")
+def rag_chatbot(
+    patient_mrn: str,
+    query: str,
+    conversation_history: List[Dict[str, str]] = None
+) -> Dict[str, Any]:
+    """
+    Conversational RAG chatbot for clinical Q&A
+    Allows clinicians to ask questions about patient data, RAG knowledge, etc.
+
+    Used by: Frontend chatbot interface
+    """
+    from app import PATIENTS_BY_MRN
+
+    if patient_mrn not in PATIENTS_BY_MRN:
+        raise HTTPException(status_code=404, detail="Patient not found")
+
+    patient = PATIENTS_BY_MRN[patient_mrn]
+
+    # Context for the RAG query
+    patient_context = get_clinical_context(patient_mrn, include="all")
+
+    # Retrieve relevant clinical information based on the query
+    query_lower = query.lower()
+
+    response_text = ""
+    sources = []
+    confidence = 0.0
+
+    # Detect intent and retrieve relevant information
+    if any(keyword in query_lower for keyword in ["drug", "medication", "interaction", "side effect"]):
+        # Drug interaction query
+        medications = [m["drugName"] for m in patient.get("medications", [])]
+        if medications:
+            interactions = rag_engine.kb.get_drug_interactions(medications)
+            response_text = format_drug_interaction_response(medications, interactions)
+            sources = ["Drug Interaction Database", "Clinical Knowledge Base"]
+            confidence = 0.85
+        else:
+            response_text = "This patient doesn't have any current medications on file."
+            confidence = 0.95
+
+    elif any(keyword in query_lower for keyword in ["lab", "result", "value", "abnormal", "trend"]):
+        # Lab query
+        labs = patient.get("recentLabs", [])
+        abnormal_labs = [l for l in labs if l.get("abnormal")]
+
+        if abnormal_labs:
+            response_text = format_lab_response(abnormal_labs)
+            sources = ["Laboratory Results", "Clinical Standards"]
+            confidence = 0.90
+        else:
+            response_text = "All recent lab values are within normal ranges for this patient."
+            confidence = 0.95
+
+    elif any(keyword in query_lower for keyword in ["condition", "diagnosis", "problem", "disease", "guideline"]):
+        # Clinical guideline query
+        conditions = [p.get("diagnosis") for p in patient.get("problems", [])]
+
+        if conditions:
+            guideline_text = format_guidelines_response(conditions, rag_engine.kb)
+            response_text = guideline_text
+            sources = ["Clinical Guidelines", "Evidence-Based Medicine", "ICD-10 Database"]
+            confidence = 0.82
+        else:
+            response_text = "No active conditions on file for this patient."
+            confidence = 0.95
+
+    elif any(keyword in query_lower for keyword in ["allergy", "contraindication", "alert", "warning"]):
+        # Safety/alert query
+        alerts = patient.get("alerts", [])
+        allergies = patient.get("allergies", [])
+
+        if alerts or allergies:
+            response_text = format_safety_response(alerts, allergies)
+            sources = ["Patient Safety Database", "Clinical Alerts", "Allergy Records"]
+            confidence = 0.90
+        else:
+            response_text = "No current safety alerts or known allergies for this patient."
+            confidence = 0.95
+
+    elif any(keyword in query_lower for keyword in ["preventive", "screening", "vaccine", "check-up"]):
+        # Preventive care query
+        age = patient.get("age")
+        gender = patient.get("gender")
+        conditions = [p.get("diagnosis") for p in patient.get("problems", [])]
+
+        screening_recs = rag_engine.kb.get_screening_recommendations({
+            "age": age,
+            "gender": gender,
+            "conditions": conditions
+        })
+
+        if screening_recs:
+            overdue = [s for s in screening_recs if s.get("priority") == "high"]
+            response_text = format_preventive_care_response(overdue, screening_recs)
+            sources = ["Preventive Care Guidelines", "Screening Protocols"]
+            confidence = 0.85
+        else:
+            response_text = "No preventive care recommendations at this time."
+            confidence = 0.80
+
+    elif any(keyword in query_lower for keyword in ["vital", "blood pressure", "heart rate", "weight", "bmi"]):
+        # Vitals query
+        vitals = patient.get("vitals", [])
+        if vitals:
+            latest_vitals = vitals[-1] if vitals else {}
+            response_text = format_vitals_response(latest_vitals)
+            sources = ["Vital Signs Record"]
+            confidence = 0.95
+        else:
+            response_text = "No vital signs recorded for this patient."
+            confidence = 0.95
+
+    else:
+        # General query - retrieve context
+        retrieved = retrieve_context(query, "all")
+        response_text = format_general_response(query, retrieved, patient)
+        sources = ["Clinical Knowledge Base", "Patient Records"]
+        confidence = 0.75
+
+    return {
+        "patient_mrn": patient_mrn,
+        "query": query,
+        "response": response_text,
+        "sources": sources,
+        "confidence": confidence,
+        "timestamp": datetime.now().isoformat()
+    }
+
+
 @router.post("/retrieve/patient")
 def retrieve_patient_context_tool(patient_data: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -490,3 +662,142 @@ def get_tool_definitions() -> Dict[str, Any]:
 
 
 from datetime import datetime
+
+
+# ============================================================================
+# CHATBOT RESPONSE FORMATTERS
+# ============================================================================
+
+def format_drug_interaction_response(medications: List[str], interactions: Dict) -> str:
+    """Format drug interaction data for chatbot response"""
+    total = interactions.get("total_interactions", 0)
+
+    if total == 0:
+        return f"Good news! No significant drug interactions detected for {', '.join(medications)}."
+
+    response = f"⚠️ Found {total} drug interaction(s):\n\n"
+
+    for interaction in interactions.get("interactions", [])[:3]:
+        severity = interaction.get("severity", "moderate").upper()
+        drug1 = interaction.get("drug1", "")
+        drug2 = interaction.get("drug2", "")
+        response += f"• **{drug1}** ↔️ **{drug2}** [{severity}]\n"
+        response += f"  {interaction.get('interaction_type', 'May interact')}\n"
+
+    if total > 3:
+        response += f"\n...and {total - 3} more interaction(s)."
+
+    return response
+
+
+def format_lab_response(abnormal_labs: List[Dict]) -> str:
+    """Format lab results for chatbot response"""
+    response = f"⚠️ {len(abnormal_labs)} abnormal lab value(s):\n\n"
+
+    for lab in abnormal_labs[:5]:
+        test_name = lab.get("testName", "Unknown test")
+        value = lab.get("value", "N/A")
+        unit = lab.get("unit", "")
+        normal_range = lab.get("normalRange", "see reference range")
+
+        response += f"• **{test_name}**: {value} {unit}\n"
+        response += f"  Normal: {normal_range}\n"
+
+    return response
+
+
+def format_guidelines_response(conditions: List[str], kb) -> str:
+    """Format clinical guidelines for chatbot response"""
+    if not conditions:
+        return "No active conditions to provide guidelines for."
+
+    response = "📚 Clinical Guidelines:\n\n"
+
+    for condition in conditions[:3]:
+        # Try to find condition in KB
+        condition_data = kb.conditions.get(condition)
+
+        if condition_data:
+            response += f"**{condition_data.get('name', condition)}**\n"
+            response += f"Management: {', '.join(condition_data.get('management', ['See specialist']))}\n"
+            response += f"Target: {condition_data.get('target_bp', condition_data.get('target', 'Follow protocol'))}\n"
+            response += f"⚠️ Red flags: {', '.join(condition_data.get('red_flags', ['See documentation'])[:2])}\n\n"
+        else:
+            response += f"**{condition}** - Please consult clinical references for latest guidelines.\n\n"
+
+    return response
+
+
+def format_safety_response(alerts: List[Dict], allergies: List[Dict]) -> str:
+    """Format safety alerts and allergies for chatbot response"""
+    response = "🚨 Safety Information:\n\n"
+
+    if alerts:
+        response += "**Active Alerts:**\n"
+        for alert in alerts[:3]:
+            severity = alert.get("severity", "medium").upper()
+            response += f"• [{severity}] {alert.get('message', 'Alert')}\n"
+        response += "\n"
+
+    if allergies:
+        response += "**Known Allergies:**\n"
+        for allergy in allergies[:3]:
+            allergen = allergy.get("allergen", "Unknown")
+            reaction = allergy.get("reactionType", "Unknown")
+            severity = allergy.get("severity", "moderate")
+            response += f"• **{allergen}** → {reaction} ({severity})\n"
+
+    return response
+
+
+def format_preventive_care_response(overdue: List[Dict], all_recs: List[Dict]) -> str:
+    """Format preventive care recommendations for chatbot response"""
+    response = "🏥 Preventive Care Status:\n\n"
+
+    if overdue:
+        response += f"⚠️ **Overdue ({len(overdue)}):**\n"
+        for rec in overdue[:3]:
+            response += f"• {rec.get('name', 'Screening')} (due {rec.get('due_date', 'now')})\n"
+        response += "\n"
+
+    upcoming = [r for r in all_recs if r.get("priority") == "medium"]
+    if upcoming:
+        response += f"📅 **Upcoming ({len(upcoming)}):**\n"
+        for rec in upcoming[:3]:
+            response += f"• {rec.get('name', 'Screening')} (due {rec.get('due_date', 'soon')})\n"
+
+    return response
+
+
+def format_vitals_response(vitals: Dict) -> str:
+    """Format vital signs for chatbot response"""
+    if not vitals:
+        return "No vital signs available."
+
+    response = "📊 Current Vitals:\n\n"
+    response += f"• BP: {vitals.get('bloodPressure', 'N/A')}\n"
+    response += f"• HR: {vitals.get('heartRate', 'N/A')} bpm\n"
+    response += f"• Weight: {vitals.get('weight', 'N/A')} lbs\n"
+    response += f"• BMI: {vitals.get('bmi', 'N/A')}\n"
+
+    return response
+
+
+def format_general_response(query: str, retrieved: Dict, patient: Dict) -> str:
+    """Format general query response"""
+    response = f"Based on your question about '{query}', here's what I found:\n\n"
+
+    results = retrieved.get("results", [])
+
+    if results:
+        for item in results[:3]:
+            response += f"• {item.get('content', 'Information found')[:100]}...\n"
+    else:
+        response += f"I searched the clinical knowledge base but didn't find specific information matching '{query}'.\n"
+        response += "Please try asking about:\n"
+        response += "- Medications and drug interactions\n"
+        response += "- Lab values and trends\n"
+        response += "- Clinical conditions and guidelines\n"
+        response += "- Preventive care and screening\n"
+
+    return response

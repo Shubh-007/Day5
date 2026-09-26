@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import LoadingSpinner from '../components/LoadingSpinner'
+import RAGChatbot from '../components/RAGChatbot'
+import { apiFetch } from '../api/client'
 import '../styles/quickview.css'
 
 function QuickView({ mrn, onBack }) {
@@ -28,16 +30,14 @@ function QuickView({ mrn, onBack }) {
     try {
       setLoading(true)
       const [summRes, detailRes, ragRes] = await Promise.all([
-        fetch(`/api/patients/${mrn}/summary`),
-        fetch(`/api/patients/${mrn}`),
-        fetch(`/api/tools/clinical-context/${mrn}?include=problems,medications,alerts`)
+        apiFetch(`/api/patients/${mrn}/summary`),
+        apiFetch(`/api/patients/${mrn}`),
+        apiFetch(`/api/tools/clinical-context/${mrn}?include=problems,medications,alerts`)
       ])
-
-      if (!summRes.ok || !detailRes.ok) throw new Error('Failed to fetch patient data')
 
       const summData = await summRes.json()
       const detailData = await detailRes.json()
-      const ragData = ragRes.ok ? await ragRes.json() : null
+      const ragData = await ragRes.json()
 
       setSummary(summData)
       setDetails(detailData)
@@ -57,15 +57,12 @@ function QuickView({ mrn, onBack }) {
   const fetchDrugInteractions = async (medications) => {
     try {
       const drugNames = medications.map(m => m.split(' ')[0]) // Extract drug names
-      const res = await fetch('/api/tools/drug-interactions', {
+      const res = await apiFetch('/api/tools/drug-interactions', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ medications: drugNames })
       })
-      if (res.ok) {
-        const data = await res.json()
-        setDrugInteractions(data)
-      }
+      const data = await res.json()
+      setDrugInteractions(data)
     } catch (err) {
       console.error('Failed to fetch drug interactions:', err)
     }
@@ -76,11 +73,9 @@ function QuickView({ mrn, onBack }) {
       // Fetch guidelines for each condition
       const guidelines = {}
       for (const condition of conditions) {
-        const res = await fetch(`/api/tools/retrieve/context?query=${encodeURIComponent(condition + ' management')}&context_type=guideline`)
-        if (res.ok) {
-          const data = await res.json()
-          guidelines[condition] = data
-        }
+        const res = await apiFetch(`/api/tools/retrieve/context?query=${encodeURIComponent(condition + ' management')}&context_type=guideline`)
+        const data = await res.json()
+        guidelines[condition] = data
       }
       setClinicalGuidelines(guidelines)
     } catch (err) {
@@ -308,6 +303,13 @@ function QuickView({ mrn, onBack }) {
           <p className="tip">💡 Tip: Review this summary in under 30 seconds before entering the exam room</p>
           <button className="action-btn" onClick={onBack}>Open Full Chart</button>
         </div>
+
+        {/* RAG Clinical Assistant Chatbot */}
+        <RAGChatbot
+          mrn={mrn}
+          patientName={summary.patientName}
+          patientData={summary}
+        />
       </div>
     </div>
   )

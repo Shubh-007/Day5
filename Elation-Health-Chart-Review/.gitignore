@@ -1,0 +1,38 @@
+# Environment & secrets (NEVER commit)
+.env
+.env.local
+.env.*.local
+*.key
+
+# Python
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+backend/.pytest_cache/
+backend/.coverage
+backend/dist/
+backend/*.egg-info/
+
+# Node/frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# Logs
+backend/logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+build/
+dist/

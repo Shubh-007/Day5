@@ -1,9 +1,17 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 import json
 import os
 from datetime import datetime
 from typing import Optional
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
+from auth import get_current_user, can_access_patient, CurrentUser, authenticate_user, create_access_token
+from crypto_store import load_encrypted_json
+from audit_log import log_access
 from tools_api import router as tools_router
 
 app = FastAPI(
@@ -11,22 +19,22 @@ app = FastAPI(
     description="AI-powered clinical summarization with RAG engine and sub-agent tools"
 )
 
-# Enable CORS for frontend
+# Enable CORS for frontend with restricted origins
+CORS_ALLOWED_ORIGIN = os.environ.get("CORS_ALLOWED_ORIGIN", "http://localhost:3000")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[CORS_ALLOWED_ORIGIN],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type", "Authorization"],
 )
 
 # Include tools API router
 app.include_router(tools_router)
 
-# Load sample patient data
-DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "sample_patients.json")
-with open(DATA_PATH, "r") as f:
-    PATIENT_DATA = json.load(f)
+# Load encrypted patient data
+ENC_DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "sample_patients.json.enc")
+PATIENT_DATA = load_encrypted_json(ENC_DATA_PATH)
 
 # Index patients by MRN for quick lookup
 PATIENTS_BY_MRN = {p["mrn"]: p for p in PATIENT_DATA["patients"]}
@@ -117,9 +125,13 @@ def root():
             "Pre-visit preparation",
             "RAG-powered clinical knowledge retrieval",
             "Sub-agent tools for AI automation",
-            "Alert management & safety validation"
+            "Alert management & safety validation",
+            "Secure authentication & authorization",
+            "PHI encryption at rest",
+            "Comprehensive audit logging"
         ],
         "endpoints": {
+            "login": "/api/auth/login",
             "dashboard": "/api/dashboard",
             "patient_summary": "/api/patients/{mrn}/summary",
             "patient_details": "/api/patients/{mrn}",
@@ -131,11 +143,63 @@ def root():
     }
 
 
-@app.get("/api/patients")
-def list_patients():
-    """List all patients with basic info"""
+@app.post("/api/auth/login")
+def login(username: str, password: str):
+    """Authenticate a user and return a JWT access token."""
+    user = authenticate_user(username, password)
+    if not user:
+        log_access(
+            user=username,
+            role="unknown",
+            action="LOGIN_FAILED",
+            mrn=None,
+            ip="unknown",
+            result="denied",
+            detail="Invalid credentials"
+        )
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    token = create_access_token(
+        username=user.username,
+        role=user.role,
+        display_name=user.display_name
+    )
+
+    log_access(
+        user=user.username,
+        role=user.role,
+        action="LOGIN",
+        mrn=None,
+        ip="unknown",
+        result="success"
+    )
+
     return {
-        "count": len(PATIENT_DATA["patients"]),
+        "access_token": token,
+        "token_type": "bearer",
+        "role": user.role,
+        "display_name": user.display_name
+    }
+
+
+@app.get("/api/patients")
+def list_patients(current_user: CurrentUser = Depends(get_current_user)):
+    """List patients accessible to the current user"""
+    # Filter patients based on user role/RBAC
+    accessible_patients = [p for p in PATIENT_DATA["patients"] if can_access_patient(current_user, p)]
+
+    log_access(
+        user=current_user.username,
+        role=current_user.role,
+        action="LIST_PATIENTS",
+        mrn=None,
+        ip="unknown",
+        result="success",
+        detail=f"{len(accessible_patients)} patients"
+    )
+
+    return {
+        "count": len(accessible_patients),
         "patients": [
             {
                 "mrn": p["mrn"],
@@ -146,40 +210,100 @@ def list_patients():
                 "nextVisit": p["nextVisit"],
                 "provider": p["primaryCareProvider"],
             }
-            for p in PATIENT_DATA["patients"]
+            for p in accessible_patients
         ]
     }
 
 
 @app.get("/api/patients/{mrn}/summary")
-def get_patient_summary(mrn: str):
+def get_patient_summary(mrn: str, current_user: CurrentUser = Depends(get_current_user)):
     """Get AI-generated pre-visit summary for a patient"""
     if mrn not in PATIENTS_BY_MRN:
         raise HTTPException(status_code=404, detail="Patient not found")
 
     patient = PATIENTS_BY_MRN[mrn]
+
+    # RBAC check: 404 for both "not found" and "not yours" to avoid MRN leakage
+    if not can_access_patient(current_user, patient):
+        log_access(
+            user=current_user.username,
+            role=current_user.role,
+            action="GET /api/patients/{mrn}/summary",
+            mrn=mrn,
+            ip="unknown",
+            result="denied",
+            detail="Patient not in scope"
+        )
+        raise HTTPException(status_code=404, detail="Patient not found")
+
+    log_access(
+        user=current_user.username,
+        role=current_user.role,
+        action="GET /api/patients/{mrn}/summary",
+        mrn=mrn,
+        ip="unknown",
+        result="success"
+    )
+
     return generate_summary(patient)
 
 
 @app.get("/api/patients/{mrn}")
-def get_patient_details(mrn: str):
+def get_patient_details(mrn: str, current_user: CurrentUser = Depends(get_current_user)):
     """Get complete patient chart"""
     if mrn not in PATIENTS_BY_MRN:
         raise HTTPException(status_code=404, detail="Patient not found")
 
-    return PATIENTS_BY_MRN[mrn]
+    patient = PATIENTS_BY_MRN[mrn]
+
+    # RBAC check: 404 for both "not found" and "not yours" to avoid MRN leakage
+    if not can_access_patient(current_user, patient):
+        log_access(
+            user=current_user.username,
+            role=current_user.role,
+            action="GET /api/patients/{mrn}",
+            mrn=mrn,
+            ip="unknown",
+            result="denied",
+            detail="Patient not in scope"
+        )
+        raise HTTPException(status_code=404, detail="Patient not found")
+
+    log_access(
+        user=current_user.username,
+        role=current_user.role,
+        action="GET /api/patients/{mrn}",
+        mrn=mrn,
+        ip="unknown",
+        result="success"
+    )
+
+    return patient
 
 
 @app.get("/api/dashboard")
-def get_dashboard():
-    """Get dashboard with all patient summaries (like a clinician's daily schedule)"""
+def get_dashboard(current_user: CurrentUser = Depends(get_current_user)):
+    """Get dashboard with patient summaries accessible to current user"""
+    # Filter patients based on user role/RBAC
+    accessible_patients = [p for p in PATIENT_DATA["patients"] if can_access_patient(current_user, p)]
+
     summaries = []
-    for patient in PATIENT_DATA["patients"]:
+    for patient in accessible_patients:
         summary = generate_summary(patient)
         summaries.append(summary)
 
     # Sort by next visit time
     summaries.sort(key=lambda s: s["nextVisitIn"])
+
+    log_access(
+        user=current_user.username,
+        role=current_user.role,
+        action="GET /api/dashboard",
+        mrn=None,
+        ip="unknown",
+        result="success",
+        detail=f"{len(summaries)} patients"
+    )
 
     return {
         "totalPatients": len(summaries),
@@ -189,10 +313,13 @@ def get_dashboard():
 
 
 @app.get("/api/alerts")
-def get_all_alerts():
-    """Get all critical alerts across all patients"""
+def get_all_alerts(current_user: CurrentUser = Depends(get_current_user)):
+    """Get critical alerts for patients accessible to current user"""
+    # Filter patients based on user role/RBAC
+    accessible_patients = [p for p in PATIENT_DATA["patients"] if can_access_patient(current_user, p)]
+
     all_alerts = []
-    for patient in PATIENT_DATA["patients"]:
+    for patient in accessible_patients:
         for alert in patient["alerts"]:
             all_alerts.append({
                 "patientMRN": patient["mrn"],
@@ -203,6 +330,16 @@ def get_all_alerts():
     # Sort by severity
     severity_order = {"high": 0, "medium": 1, "low": 2}
     all_alerts.sort(key=lambda a: severity_order.get(a["severity"], 3))
+
+    log_access(
+        user=current_user.username,
+        role=current_user.role,
+        action="GET /api/alerts",
+        mrn=None,
+        ip="unknown",
+        result="success",
+        detail=f"{len(all_alerts)} alerts"
+    )
 
     return {
         "totalAlerts": len(all_alerts),

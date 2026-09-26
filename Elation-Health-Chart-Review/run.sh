@@ -28,8 +28,8 @@ fi
 echo -e "${GREEN}✓ Python $(python3 --version | cut -d' ' -f2) found${NC}"
 echo -e "${GREEN}✓ Node $(node --version) found${NC}"
 
-# Create virtual environment for backend if it doesn't exist
-if [ ! -d "backend/venv" ]; then
+# Create/ensure virtual environment for backend with dependencies
+if [ ! -d "backend/venv/bin" ] || [ ! -f "backend/venv/bin/pip" ]; then
     echo -e "\n${YELLOW}📦 Creating Python virtual environment...${NC}"
     cd backend
     python3 -m venv venv
@@ -37,6 +37,12 @@ if [ ! -d "backend/venv" ]; then
     pip install -q -r requirements.txt
     cd ..
     echo -e "${GREEN}✓ Backend environment ready${NC}"
+else
+    # Venv exists but ensure all requirements are installed
+    cd backend
+    source venv/bin/activate
+    pip install -q -r requirements.txt
+    cd ..
 fi
 
 # Install frontend dependencies if node_modules doesn't exist

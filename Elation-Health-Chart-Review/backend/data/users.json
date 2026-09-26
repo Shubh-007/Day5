@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$rimhAvV/PYIvN7ys1ouURw$txVFzVLjjFte70kOUeQL1i3SC7mZo6o7Wa8wydW8rTo",
+      "role": "admin",
+      "display_name": "System Administrator"
+    },
+    {
+      "username": "schen",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$0UFmjT/thOSVabatytR7Ig$iY2yAW0GBCMgnOabob7VQgx7yMnKPPyy2kbR82jfSaI",
+      "role": "clinician",
+      "display_name": "Dr. Sarah Chen"
+    },
+    {
+      "username": "mpark",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$xXCNzDPX5Q2OIDiH/bnNNQ$3/lKnf0JsDwsmOBsCwY7+H7+fPW2h0PvKi2F7VwEn+E",
+      "role": "clinician",
+      "display_name": "Dr. Michael Park"
+    }
+  ]
+}
